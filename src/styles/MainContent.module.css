@@ -1,0 +1,5 @@
+.mainContent {
+    margin-top: var(--navbar-height);
+    display: flex;
+    overflow-wrap: break-word;
+}

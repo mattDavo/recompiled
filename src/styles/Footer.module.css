@@ -1,0 +1,4 @@
+.container {
+    background-color: var(--alt-background-color);
+    width: 100vw;
+}

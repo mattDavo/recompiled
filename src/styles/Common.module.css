@@ -1,0 +1,80 @@
+.keyword {
+    color: var(--primary-color);
+    font-weight: 800;
+}
+
+.textContent {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.heading1 {
+    font-size: 48px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    line-height: 1em;
+}
+
+.heading2 {
+    font-size: 36px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.heading3 {
+    font-size: 32px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.subheading {
+    font-size: 18px;
+    line-height: 1.3em;
+}
+
+.divider {
+    border: none;
+    background-color: var(--alt-background-color);
+    height: 2px;
+}
+
+.hash {
+    color: var(--secondary-text-color);
+}
+
+.card {
+    box-shadow: 10px 10px 40px -20px black;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.247);
+    margin: 20px;
+    padding: 15px;
+    border-radius: 20px;
+    background-color: var(--alt-background-color);
+    line-height: 1.5em;
+}
+
+.cardTitle {
+    margin-top: 0;
+}
+
+.cardTitleLink {
+    color: var(--primary-color);
+}
+
+.cardTitle.cardTitleLink:hover {
+}
+
+.note {
+    border-left: 7px solid var(--secondary-text-color);
+    color: var(--secondary-text-color);
+    padding: 15px 0px 15px 20px;
+    font-size: 18px;
+}
+
+.isPrimary {
+    color: var(--primary-color);
+}
+
+.cleanLink {
+    text-decoration: none;
+    color: unset;
+}

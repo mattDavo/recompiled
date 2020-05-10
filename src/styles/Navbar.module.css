@@ -1,0 +1,112 @@
+.navbar {
+    position: fixed;
+    display: flex;
+
+    left: 0;
+    right: 0;
+    top: 0;
+    height: var(--navbar-height);
+    padding: var(--navbar-padding);
+
+    background-color: var(--alt-background-color);
+
+    z-index: 100;
+
+    box-shadow: 0 0.4px 1px black;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.title:focus {
+    background-color: unset;
+}
+
+.navbarItems {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.navbarItemsRight {
+    composes: navbarItems;
+
+    justify-content: flex-end;
+}
+
+.navbarItem {
+    font-size: 24px;
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 10px;
+
+    border-radius: 5px;
+    color: var(--text-color);
+}
+
+.navbarItemSelected {
+    color: var(--primary-color);
+}
+
+/* TODO: Refator these 2 a.* nicely */
+a.navbarItem {
+    /* color: unset; */
+    text-decoration: none;
+}
+
+a.navbarItem:hover,
+a.navbarItem:focus {
+    background-color: #424242;
+    outline: none;
+}
+
+.searchBar {
+    background-color: var(--background-color);
+    border-radius: 30px;
+    height: 30px;
+    padding: 0 10px;
+}
+
+.searchField {
+    border-color: transparent;
+    background-color: transparent;
+
+    color: var(--text-color);
+
+    font-size: 16px;
+    height: 100%;
+    border-width: 0px;
+    margin-left: 5px;
+}
+
+.searchField:focus {
+    outline: none;
+}
+
+.searchFieldIcon {
+    margin-left: 2px;
+}
+
+.colorSwatch {
+    height: 25px;
+    width: 25px;
+    background-color: var(--primary-color);
+    border: solid;
+    border-color: var(--text-color);
+    border-width: 2px;
+    padding: 0;
+}
+
+.colorSwatch:hover {
+    cursor: pointer;
+}
+
+.colorSwatchSelector {
+    height: 200px;
+    width: 30px;
+    background-color: var(--background-color);
+    position: absolute;
+}

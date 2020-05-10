@@ -1,0 +1,60 @@
+:root {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, Cantarell, 'Noto Sans', sans-serif, system-ui,
+        'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+.theme-default,
+.theme-green {
+    --primary-color: #005a1e;
+    --primary-color-faint: #005a1e48;
+}
+
+.theme-orange {
+    --primary-color: orange;
+    --primary-color-faint: rgba(255, 166, 0, 0.267);
+}
+
+.theme-blue {
+    --primary-color: rgb(0, 45, 128);
+    --primary-color-faint: rgba(0, 45, 128, 0.247);
+}
+
+:root,
+.theme-light {
+    --background-color: #ffffff;
+    --alt-background-color: #e9e9e9;
+    --text-color: black;
+    --secondary-text-color: #313131;
+
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    .theme-default,
+    .theme-green {
+        --primary-color: #00e279;
+        --primary-color-faint: #00e27834;
+    }
+
+    .theme-orange {
+        --primary-color: orange;
+        --primary-color-faint: rgba(255, 166, 0, 0.247);
+    }
+
+    .theme-blue {
+        --primary-color: rgb(27, 98, 230);
+        --primary-color-faint: rgba(27, 98, 230, 0.24);
+    }
+
+    :root,
+    .theme-dark {
+        --background-color: #333;
+        --alt-background-color: #242424;
+        --text-color: rgb(240, 240, 240);
+        --secondary-text-color: #949494b2;
+
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+}

@@ -1,0 +1,10 @@
+:root {
+    --navbar-height: 60px;
+    --navbar-y-padding: 10px;
+    --navbar-x-padding: 20px;
+    --navbar-padding: var(--navbar-y-padding) var(--navbar-x-padding);
+
+    --sidebar-top: var(--navbar-height);
+    --sidebar-height: calc(100vh - var(--sidebar-top));
+    --sidebar-width: 250px;
+}

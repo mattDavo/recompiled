@@ -1,0 +1,28 @@
+:root {
+    overflow-wrap: break-word;
+}
+
+/* See: https://stackoverflow.com/questions/35256279/can-i-use-in-global-box-sizingborder-box-in-my-project */
+body {
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+html {
+    box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+a {
+    color: var(--primary-color);
+    border-radius: 2px;
+}
+
+a:hover,
+a:focus {
+    background-color: var(--primary-color-faint);
+}
