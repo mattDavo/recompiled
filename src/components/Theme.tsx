@@ -10,7 +10,8 @@ type Props = PropsWithChildren<React.ReactNode> & {
 const defaultColors = ['green', 'orange', 'blue'];
 
 export default function Theme(props: Props) {
-    let { color, dark } = props;
+    let { color } = props;
+    const { dark } = props;
     if (!color || !defaultColors.includes(color)) {
         color = 'default';
     }

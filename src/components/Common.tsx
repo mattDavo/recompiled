@@ -20,6 +20,10 @@ export function HashHeading2(props: { children: React.ReactNode }) {
     );
 }
 
+export function Keyword(props: { children: React.ReactNode }) {
+    return <span className={styles.keyword}>{props.children}</span>;
+}
+
 const maxWidth = '800px';
 const mdxContainerMargin = '20px';
 
@@ -29,6 +33,7 @@ const ContentContainer = styled.div`
     line-height: 1.5em;
     font-size: 18px;
     margin-left: max(calc((100vw - ${maxWidth}) / 2 - var(--sidebar-width)), ${mdxContainerMargin});
+    width: 100%;
 `;
 
 export { ContentContainer };

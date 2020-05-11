@@ -1,9 +1,8 @@
 import React, { HTMLAttributes } from 'react';
 import { FaPodcast } from 'react-icons/fa';
 
-import { HashHeading1 } from '../components/Common';
+import { HashHeading1, ContentContainer } from '../components/Common';
 
-import styles from '../styles/Podcasts.module.css';
 import commonStyles from '../styles/Common.module.css';
 
 const Card = (props: { children: React.ReactNode }) => {
@@ -12,6 +11,7 @@ const Card = (props: { children: React.ReactNode }) => {
 
 const CardTitle = (props: HTMLAttributes<HTMLHeadingElement>) => {
     return (
+        // eslint-disable-next-line react/jsx-props-no-spreading
         <h3 className={commonStyles.cardTitle} {...props}>
             {props.children}
         </h3>
@@ -24,8 +24,8 @@ const Note = (props: { children: React.ReactNode }) => {
 
 export default function Podcasts() {
     return (
-        <div className={styles.container}>
-            <div className={commonStyles.textContent}>
+        <ContentContainer>
+            <div>
                 <HashHeading1>
                     Podcasts <FaPodcast size="0.9em" />
                 </HashHeading1>
@@ -36,6 +36,6 @@ export default function Podcasts() {
             </Card>
             <Card>Chats with Kent C. Dodds</Card>
             <Card>Software Engineering Daily</Card>
-        </div>
+        </ContentContainer>
     );
 }

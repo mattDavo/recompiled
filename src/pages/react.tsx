@@ -21,7 +21,7 @@ interface BasicProps {
 export default function Basics(props: BasicProps) {
     return (
         <ContentContainer>
-            <HashHeading1>Basics</HashHeading1>
+            <HashHeading1>React ⚛️</HashHeading1>
             <ol>
                 {props.data.allMdx.edges.map((edge) => {
                     return (
@@ -37,7 +37,7 @@ export default function Basics(props: BasicProps) {
 
 export const query = graphql`
     query BasicsIndex {
-        allMdx(filter: { fileAbsolutePath: { regex: "//content/basics/" } }, sort: { fields: frontmatter___order }) {
+        allMdx(filter: { fileAbsolutePath: { regex: "//content/react/" } }, sort: { fields: frontmatter___order }) {
             edges {
                 node {
                     id

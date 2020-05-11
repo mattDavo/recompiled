@@ -33,10 +33,6 @@ const exampleContent = [
     },
 ];
 
-const Posts = () => {
-    return <div className={styles.postsContainer}>{exampleContent.map(Post)}</div>;
-};
-
 const Post = (data: { title: string; date: string; content: string }) => {
     return (
         <div className={styles.postContainer}>
@@ -47,6 +43,10 @@ const Post = (data: { title: string; date: string; content: string }) => {
             </div>
         </div>
     );
+};
+
+const Posts = () => {
+    return <div className={styles.postsContainer}>{exampleContent.map(Post)}</div>;
 };
 
 const Welcome = () => {
@@ -64,21 +64,22 @@ export default function Home() {
         <div className={styles.container}>
             <Welcome />
             <p className={styles.subHeading}>
-                Welcome to <span className={commonStyles.keyword}>Let's Learn React!</span> Here you'll find articles
-                written by Matt Davidson on everything related to learning frontend web development in{' '}
+                Welcome to <span className={commonStyles.keyword}>Recompiled[JT]S</span>{' '}
+                {
+                    "Here you'll find articles written by Matt Davidson on anything related to learning frontend web development in javascript/ typescript with a focus on using "
+                }
                 <a href="https://reactjs.org" className={commonStyles.keyword}>
                     ReactJS
                 </a>
-                . Here you can join me on my journey to becoming the best React developers we can be. You will find
+                . Here you can join me on my journey to becoming the best web developers we can be. You will find
                 original articles on fundamentals, links and reviews of other resources, using React libraries, options
                 in tooling, and more!
                 <br />
                 <br />
-                {/* <Link to="/contributing">Contributions</Link> */}
                 <Link to="/contributing" className={commonStyles.keyword}>
                     Contributions
-                </Link>{' '}
-                are welcomed and encouraged!
+                </Link>
+                {' are welcomed and encouraged!'}
                 <br />
                 <br />
             </p>

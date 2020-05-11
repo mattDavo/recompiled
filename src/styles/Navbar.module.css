@@ -21,6 +21,7 @@
     text-decoration: none;
 }
 
+.title:hover,
 .title:focus {
     background-color: unset;
 }

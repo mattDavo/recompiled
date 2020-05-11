@@ -33,7 +33,7 @@ export default function DefaultMDX(props: {
         <ContentContainer>
             <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
             <EditThisPage
-                href={`https://www.github.com/mattdavo/learn-react/tree/master/${props.data.mdx.fields.rootPath}`}
+                href={`https://www.github.com/mattdavo/learn-react-dev/tree/master/${props.data.mdx.fields.rootPath}`}
             >
                 Edit this page.
             </EditThisPage>

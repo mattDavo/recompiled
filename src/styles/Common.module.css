@@ -1,6 +1,6 @@
 .keyword {
     color: var(--primary-color);
-    font-weight: 800;
+    font-weight: 600;
 }
 
 .textContent {
@@ -45,7 +45,7 @@
 .card {
     box-shadow: 10px 10px 40px -20px black;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.247);
-    margin: 20px;
+    margin: 20px 0;
     padding: 15px;
     border-radius: 20px;
     background-color: var(--alt-background-color);

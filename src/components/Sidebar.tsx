@@ -90,22 +90,20 @@ const SidebarItem = (props: { title: string; link: string; children?: React.Reac
 
 export default function Sidebar() {
     return (
-        <div className={styles.sidebarContainer}>
+        <nav className={styles.sidebarContainer}>
             <div className={styles.sidebar}>
                 <SidebarItem title="Home" link="/" />
-                <SidebarItem title="Basics" link="/basics">
-                    <SidebarItem title="What's React?" link="/basics/what-is-react" />
-                    <SidebarItem title="Where do I start?" link="/basics/getting-started" />
+                <SidebarItem title="React" link="/react">
+                    <SidebarItem title="What's React?" link="/react/what-is-react" />
+                    <SidebarItem title="Where do I start?" link="/react/getting-started" />
                 </SidebarItem>
                 <SidebarItem title="Articles" link="/articles" />
-                <SidebarItem title="Topics" link="/topics">
-                    <SidebarItem title="Basics" link="/topics/basics" />
-                </SidebarItem>
+                <SidebarItem title="Topics" link="/topics" />
                 <SidebarItem title="Open Source" link="/open-source" />
                 <SidebarItem title="Podcasts" link="/podcasts" />
                 <SidebarItem title="Resources" link="/resources" />
                 <SidebarItem title="Contributing" link="/contributing" />
             </div>
-        </div>
+        </nav>
     );
 }

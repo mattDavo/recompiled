@@ -15,8 +15,7 @@ import Footer from './Footer';
 import '../styles/Constants.css';
 import '../styles/App.css';
 
-const Layout = (props) => {
-    console.log(props);
+const Layout = (props: { children: React.ReactNode }) => {
     return (
         <Theme color="orange">
             <Navbar />

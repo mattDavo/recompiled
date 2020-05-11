@@ -35,35 +35,31 @@ const NavbarItemLink = ({
                 {children}
             </a>
         );
-    } else {
-        return (
-            <Link to={path} className={className}>
-                {children}
-            </Link>
-        );
     }
+    return (
+        <Link to={path} className={className}>
+            {children}
+        </Link>
+    );
 };
 
 export default function Navbar() {
-    const location = useLocation();
-    location.pathname;
-
     return (
-        <div className={styles.navbar}>
+        <header className={styles.navbar}>
             <div className={styles.navbarItems}>
                 <Link to="/" className={styles.title}>
                     <span className={styles.title} role="img" aria-label="rocket">
-                        🚀 Let's Learn React!
+                        {'🚀 Recompiled[JT]S'}
                     </span>
                 </Link>
             </div>
             <div className={styles.navbarItemsRight}>
                 <NavbarItemLink path="/about">About</NavbarItemLink>
-                <NavbarItemLink path="https://github.com/mattdavo" external>
+                <NavbarItemLink path="https://github.com/mattdavo/learn-react-dev" external>
                     GitHub
                 </NavbarItemLink>
                 <SearchBar />
             </div>
-        </div>
+        </header>
     );
 }
