@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import { FaPodcast } from 'react-icons/fa';
 
-import { HashHeading1, ContentContainer } from '../components/Common';
+import { HashHeading1, ContentContainer } from './Common';
 
 import commonStyles from '../styles/Common.module.css';
 

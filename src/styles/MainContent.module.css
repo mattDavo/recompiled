@@ -3,3 +3,9 @@
     display: flex;
     overflow-wrap: break-word;
 }
+
+@media only screen and (max-width: 799px) {
+    .mainContent {
+        margin-top: auto;
+    }
+}

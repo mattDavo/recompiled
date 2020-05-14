@@ -35,7 +35,7 @@ const exampleContent = [
 
 const Post = (data: { title: string; date: string; content: string }) => {
     return (
-        <div className={styles.postContainer}>
+        <div className={styles.postContainer} key={data.title}>
             <div className={commonStyles.card}>
                 <h1>{data.title}</h1>
                 <h4>{data.date}</h4>
@@ -64,7 +64,7 @@ export default function Home() {
         <div className={styles.container}>
             <Welcome />
             <p className={styles.subHeading}>
-                Welcome to <span className={commonStyles.keyword}>Recompiled[JT]S</span>{' '}
+                Welcome to <span className={commonStyles.keyword}>Recompiled[JT]S!</span>{' '}
                 {
                     "Here you'll find articles written by Matt Davidson on anything related to learning frontend web development in javascript/ typescript with a focus on using "
                 }

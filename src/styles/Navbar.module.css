@@ -16,7 +16,7 @@
 }
 
 .title {
-    font-size: 30px;
+    font-size: 32px;
     font-weight: 800;
     text-decoration: none;
 }
@@ -110,4 +110,29 @@ a.navbarItem:focus {
     width: 30px;
     background-color: var(--background-color);
     position: absolute;
+}
+
+@media only screen and (max-width: 799px) {
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        position: relative;
+    }
+
+    .navbarItems,
+    .navbarItemsRight {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .navbarItem {
+        justify-content: center;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .searchBar {
+        width: 100%;
+        max-width: 300px;
+    }
 }

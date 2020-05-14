@@ -48,14 +48,14 @@ export default function Navbar() {
         <header className={styles.navbar}>
             <div className={styles.navbarItems}>
                 <Link to="/" className={styles.title}>
-                    <span className={styles.title} role="img" aria-label="rocket">
+                    <span role="img" aria-label="rocket">
                         {'🚀 Recompiled[JT]S'}
                     </span>
                 </Link>
             </div>
             <div className={styles.navbarItemsRight}>
                 <NavbarItemLink path="/about">About</NavbarItemLink>
-                <NavbarItemLink path="https://github.com/mattdavo/learn-react-dev" external>
+                <NavbarItemLink path="https://github.com/mattdavo/recompiledJS" external>
                     GitHub
                 </NavbarItemLink>
                 <SearchBar />

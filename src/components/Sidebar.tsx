@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { useLocation } from '@reach/router';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
-import styled from 'styled-components';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { MdClose } from 'react-icons/md';
 
 import styles from '../styles/Sidebar.module.css';
 import commonStyles from '../styles/Common.module.css';
@@ -50,7 +52,14 @@ const SidebarItemChildren = styled.div`
     border-left: var(--alt-background-color) solid 3px;
 `;
 
-const SidebarItem = (props: { title: string; link: string; children?: React.ReactNode }): JSX.Element => {
+interface SidebarItemProps {
+    title: string;
+    link: string;
+    children?: React.ReactNode;
+    onClick?: ((event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void) | undefined;
+}
+
+const SidebarItem = (props: SidebarItemProps): JSX.Element => {
     const location = useLocation();
     let highlightClass = '';
     const [expanded, setExpanded] = useState(false);
@@ -61,7 +70,7 @@ const SidebarItem = (props: { title: string; link: string; children?: React.Reac
 
     if (!props.children) {
         return (
-            <Link to={props.link} className={`${styles.sidebarItem} ${highlightClass}`}>
+            <Link to={props.link} className={`${styles.sidebarItem} ${highlightClass}`} onClick={props.onClick}>
                 {props.title}
             </Link>
         );
@@ -70,7 +79,11 @@ const SidebarItem = (props: { title: string; link: string; children?: React.Reac
     return (
         <div>
             <RelativeDiv className={highlightClass}>
-                <Link to={props.link} className={`${styles.sidebarParentItem} ${highlightClass}`}>
+                <Link
+                    to={props.link}
+                    className={`${styles.sidebarParentItem} ${highlightClass}`}
+                    onClick={props.onClick}
+                >
                     {props.title}
                 </Link>
                 {expanded ? (
@@ -88,22 +101,94 @@ const SidebarItem = (props: { title: string; link: string; children?: React.Reac
     );
 };
 
-export default function Sidebar() {
+interface SidebarContentProps {
+    onItemClick?: ((event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void) | undefined;
+}
+
+function SidebarContent({ onItemClick }: SidebarContentProps) {
+    return (
+        <div className={styles.sidebar}>
+            <SidebarItem title="Home" link="/" onClick={onItemClick} />
+            <SidebarItem title="The Web" link="/the-web" onClick={onItemClick} />
+            <SidebarItem title="React" link="/react" onClick={onItemClick}>
+                <SidebarItem title="What's React?" link="/react/what-is-react" onClick={onItemClick} />
+                <SidebarItem title="Where do I start?" link="/react/getting-started" onClick={onItemClick} />
+            </SidebarItem>
+            <SidebarItem title="Articles" link="/articles" onClick={onItemClick} />
+            <SidebarItem title="Topics" link="/topics" onClick={onItemClick} />
+            <SidebarItem title="Open Source" link="/open-source" onClick={onItemClick} />
+            <SidebarItem title="Podcasts" link="/podcasts" onClick={onItemClick} />
+            <SidebarItem title="Resources" link="/resources" onClick={onItemClick} />
+            <SidebarItem title="Contributing" link="/contributing" onClick={onItemClick} />
+        </div>
+    );
+}
+
+function Sidebar() {
     return (
         <nav className={styles.sidebarContainer}>
-            <div className={styles.sidebar}>
-                <SidebarItem title="Home" link="/" />
-                <SidebarItem title="React" link="/react">
-                    <SidebarItem title="What's React?" link="/react/what-is-react" />
-                    <SidebarItem title="Where do I start?" link="/react/getting-started" />
-                </SidebarItem>
-                <SidebarItem title="Articles" link="/articles" />
-                <SidebarItem title="Topics" link="/topics" />
-                <SidebarItem title="Open Source" link="/open-source" />
-                <SidebarItem title="Podcasts" link="/podcasts" />
-                <SidebarItem title="Resources" link="/resources" />
-                <SidebarItem title="Contributing" link="/contributing" />
-            </div>
+            <SidebarContent />
         </nav>
     );
 }
+
+const FixedToggle = styled.button`
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 101;
+    width: 80px;
+    height: 50px;
+    background-color: var(--alt-background-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+`;
+
+interface SidebarToggleProps {
+    onClick: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
+    open: boolean;
+}
+
+function SidebarToggle({ onClick, open }: SidebarToggleProps) {
+    return (
+        <FixedToggle onClick={onClick}>
+            {open ? (
+                <MdClose size="3.5em" style={{ verticalAlign: 'center' }} />
+            ) : (
+                <GiHamburgerMenu size="3em" style={{ verticalAlign: 'center' }} />
+            )}
+        </FixedToggle>
+    );
+}
+
+function MobileSidebar() {
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        show && (document.body.style.overflow = 'hidden');
+        !show && (document.body.style.overflow = 'unset');
+    }, [show]);
+
+    const navStyle = styles.mobileSidebarContainer + (show ? '' : ` ${styles.hidden}`);
+
+    return (
+        <>
+            <nav className={navStyle}>
+                <SidebarContent
+                    onItemClick={() => {
+                        setShow(false);
+                    }}
+                />
+            </nav>
+            <SidebarToggle
+                onClick={() => {
+                    setShow(!show);
+                }}
+                open={show}
+            />
+        </>
+    );
+}
+
+export { Sidebar, MobileSidebar };
