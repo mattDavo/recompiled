@@ -1,8 +1,10 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
+
+import Seo from '../components/seo';
 import { HashHeading1, ContentContainer } from '../components/Common';
 
-interface BasicProps {
+interface ReactPageProps {
     data: {
         allMdx: {
             edges: {
@@ -18,9 +20,10 @@ interface BasicProps {
     };
 }
 
-export default function Basics(props: BasicProps) {
+export default function ReactPage(props: ReactProps) {
     return (
         <ContentContainer>
+            <Seo title="React" />
             <HashHeading1>React ⚛️</HashHeading1>
             <ol>
                 {props.data.allMdx.edges.map((edge) => {

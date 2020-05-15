@@ -26,7 +26,7 @@ function SEO({ description, lang, meta, title }: { description: string; lang: st
     );
 
     const metaDescription = description || site.siteMetadata.description;
-    const resTitle = title ? `${title} | ${site.siteMetadata.title}` : site.siteMetadata.title;
+    const resTitle = title ? `${title} - ${site.siteMetadata.title}` : site.siteMetadata.title;
     return (
         <Helmet
             htmlAttributes={{

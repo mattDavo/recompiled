@@ -27,7 +27,7 @@ export function Keyword(props: { children: React.ReactNode }) {
 const maxWidth = '800px';
 const mdxContainerMargin = '20px';
 
-const ContentContainer = styled.div`
+const ContentContainer = styled.main`
     max-width: ${maxWidth};
     margin: ${mdxContainerMargin};
     line-height: 1.5em;
