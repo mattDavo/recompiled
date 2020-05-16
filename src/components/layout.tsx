@@ -11,6 +11,7 @@ import MainContent from './MainContent';
 import Navbar from './Navbar';
 import { Sidebar, MobileSidebar } from './Sidebar';
 import Footer from './Footer';
+import MobileContext from './MobileContext';
 
 import '../styles/Constants.css';
 import '../styles/Layout.css';
@@ -51,19 +52,19 @@ const Layout = (props: { children: React.ReactNode }) => {
                 {(width) => {
                     if (width >= 800) {
                         return (
-                            <>
+                            <MobileContext.Provider value={false}>
                                 <MainContent>
                                     <Sidebar />
                                     {props.children}
                                 </MainContent>
-                            </>
+                            </MobileContext.Provider>
                         );
                     } else {
                         return (
-                            <>
+                            <MobileContext.Provider value={true}>
                                 <MobileSidebar />
                                 <MainContent>{props.children}</MainContent>
-                            </>
+                            </MobileContext.Provider>
                         );
                     }
                 }}

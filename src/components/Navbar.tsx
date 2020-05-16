@@ -1,7 +1,8 @@
 import React from 'react';
-import { FaSearch } from 'react-icons/fa';
 import { Link } from 'gatsby';
+import { motion } from 'framer-motion';
 import { useLocation } from '@reach/router';
+import { FaSearch } from 'react-icons/fa';
 
 import styles from '../styles/Navbar.module.css';
 
@@ -29,17 +30,18 @@ const NavbarItemLink = ({
         className += ` ${styles.navbarItemSelected}`;
     }
 
-    if (external) {
-        return (
-            <a href={path} className={className}>
-                {children}
-            </a>
-        );
-    }
     return (
-        <Link to={path} className={className}>
-            {children}
-        </Link>
+        <motion.div whileTap={{ scale: 0.95 }} whileHover={{ scale: 1.05 }}>
+            {external ? (
+                <a href={path} className={className}>
+                    {children}
+                </a>
+            ) : (
+                <Link to={path} className={className}>
+                    {children}
+                </Link>
+            )}
+        </motion.div>
     );
 };
 

@@ -1,5 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Link } from 'gatsby';
+import { motion } from 'framer-motion';
 
 import styles from '../styles/Home.module.css';
 import commonStyles from '../styles/Common.module.css';
@@ -35,13 +37,18 @@ const exampleContent = [
 
 const Post = (data: { title: string; date: string; content: string }) => {
     return (
-        <div className={styles.postContainer} key={data.title}>
+        <motion.div
+            className={styles.postContainer}
+            key={data.title}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+        >
             <div className={commonStyles.card}>
                 <h1>{data.title}</h1>
                 <h4>{data.date}</h4>
                 <p>{data.content}</p>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
@@ -49,12 +56,23 @@ const Posts = () => {
     return <div className={styles.postsContainer}>{exampleContent.map(Post)}</div>;
 };
 
+const EmojiMotionDiv = styled(motion.div)`
+    display: inline-block;
+`;
+
 const Welcome = () => {
     return (
         <h1 className={styles.heading}>
-            <span role="img" aria-label="Celebration">
-                Welcome! 🥳
-            </span>
+            {'Welcome! '}
+            <EmojiMotionDiv
+                whileHover={{ scale: 1.3, rotate: 360 }}
+                drag
+                dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+            >
+                <span role="img" aria-label="Celebration">
+                    🥳
+                </span>
+            </EmojiMotionDiv>
         </h1>
     );
 };
