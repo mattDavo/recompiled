@@ -5,6 +5,7 @@ import { useLocation } from '@reach/router';
 import { FaSearch } from 'react-icons/fa';
 
 import styles from '../styles/Navbar.module.css';
+import MobileContext from './MobileContext';
 
 const SearchBar = () => {
     return (
@@ -31,17 +32,23 @@ const NavbarItemLink = ({
     }
 
     return (
-        <motion.div whileTap={{ scale: 0.95 }} whileHover={{ scale: 1.05 }}>
-            {external ? (
-                <a href={path} className={className}>
-                    {children}
-                </a>
-            ) : (
-                <Link to={path} className={className}>
-                    {children}
-                </Link>
-            )}
-        </motion.div>
+        <MobileContext.Consumer>
+            {(isMobile) => {
+                return (
+                    <motion.div whileTap={{ scale: isMobile ? 1 : 0.95 }} whileHover={{ scale: 1.05 }}>
+                        {external ? (
+                            <a href={path} className={className}>
+                                {children}
+                            </a>
+                        ) : (
+                            <Link to={path} className={className}>
+                                {children}
+                            </Link>
+                        )}
+                    </motion.div>
+                );
+            }}
+        </MobileContext.Consumer>
     );
 };
 

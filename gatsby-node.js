@@ -73,3 +73,21 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         });
     });
 };
+
+// Setup custom graphql schema
+exports.createSchemaCustomization = ({ actions }) => {
+    const { createTypes } = actions;
+    const typeDefs = `
+    type Mdx implements Node {
+        frontmatter: Frontmatter
+    }
+    type Frontmatter {
+        title: String
+        published: Int
+        updated: Int
+        tags: [String]
+        links: [String]
+    }
+  `;
+    createTypes(typeDefs);
+};

@@ -24,7 +24,7 @@ export function Keyword(props: { children: React.ReactNode }) {
     return <span className={styles.keyword}>{props.children}</span>;
 }
 
-const maxWidth = '800px';
+const maxWidth = '1140px';
 const mdxContainerMargin = '20px';
 
 const ContentContainer = styled.main`
@@ -33,7 +33,10 @@ const ContentContainer = styled.main`
     line-height: 1.5em;
     font-size: 18px;
     margin-left: max(calc((100vw - ${maxWidth}) / 2 - var(--sidebar-width)), ${mdxContainerMargin});
+    margin-left: auto;
+    margin-right: auto;
     width: 100%;
+    display: block;
 `;
 
 export { ContentContainer };
