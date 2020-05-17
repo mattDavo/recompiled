@@ -6,8 +6,8 @@
 
 // You can delete this file if you're not using it
 
-import PageElement from './wrapPageElement';
-import RootElement from './wrapRootElement';
+import PageElement from './gatsby/wrapPageElement';
+import RootElement from './gatsby/wrapRootElement';
 
 export const wrapPageElement = PageElement;
 

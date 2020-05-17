@@ -60,7 +60,7 @@ a.navbarItem {
 
 a.navbarItem:hover,
 a.navbarItem:focus {
-    background-color: #424242;
+    background-color: var(--hover-highlight-color);
     outline: none;
 }
 

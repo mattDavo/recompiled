@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { MDXProvider } from '@mdx-js/react';
-import { HashHeading1, Keyword } from './src/components/Common';
-import Seo from './src/components/seo';
+import { HashHeading1, Keyword } from '../src/components/Common';
+import Seo from '../src/components/seo';
 
 const HR = styled.hr`
     border-width: 0;

@@ -3,7 +3,22 @@ import { graphql, Link } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import styled from 'styled-components';
 
-import { ContentContainer } from './Common';
+import MobileContext from './MobileContext';
+
+const maxWidth = '1140px';
+const mdxContainerMargin = '20px';
+
+const MDXContainer = styled.main`
+    max-width: ${maxWidth};
+    margin: ${mdxContainerMargin};
+    line-height: 1.5em;
+    font-size: 18px;
+    margin-left: max(calc((100vw - ${maxWidth}) / 2 - var(--sidebar-width)), ${mdxContainerMargin});
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    display: block;
+`;
 
 const EditThisPage = styled.a`
     margin-top: 100px;
@@ -40,7 +55,7 @@ const MetaContent = styled.div`
     position: sticky;
     top: 100px;
     overflow-y: auto;
-    border-left: 1px solid white;
+    border-left: 1px solid var(--text-color);
     padding-left: 16px;
     font-size: 14px;
 `;
@@ -111,44 +126,52 @@ export default function DefaultMDX(props: {
     } = props;
 
     return (
-        <ContentContainer>
-            <Row>
-                <ContentCol>
-                    <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
-                    <EditThisPage
-                        href={`https://www.github.com/mattdavo/recompiledJS/tree/master/${props.data.mdx.fields.rootPath}`}
-                    >
-                        Edit this page.
-                    </EditThisPage>
-                </ContentCol>
-                <MetaCol>
-                    <MetaContent>
-                        <MetaList>
-                            <li>
-                                <b>Published: </b>
-                                {formatDate(props.data.mdx.frontmatter.published)}
-                            </li>
-                            <li>
-                                <b>Updated: </b>
-                                {formatDate(props.data.mdx.frontmatter.published)}
-                            </li>
-                            {tags && tags.length > 0 && (
-                                <li>
-                                    <b>Tags: </b>
-                                    {formatTags(tags)}
-                                </li>
+        <MDXContainer>
+            <MobileContext.Consumer>
+                {(isMobile) => {
+                    return (
+                        <Row style={{ flexDirection: isMobile ? 'column' : 'row' }}>
+                            <ContentCol>
+                                <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
+                                <EditThisPage
+                                    href={`https://www.github.com/mattdavo/recompiledJS/tree/master/${props.data.mdx.fields.rootPath}`}
+                                >
+                                    Edit this page.
+                                </EditThisPage>
+                            </ContentCol>
+                            {!isMobile && (
+                                <MetaCol>
+                                    <MetaContent>
+                                        <MetaList>
+                                            <li>
+                                                <b>Published: </b>
+                                                {formatDate(props.data.mdx.frontmatter.published)}
+                                            </li>
+                                            <li>
+                                                <b>Updated: </b>
+                                                {formatDate(props.data.mdx.frontmatter.published)}
+                                            </li>
+                                            {tags && tags.length > 0 && (
+                                                <li>
+                                                    <b>Tags: </b>
+                                                    {formatTags(tags)}
+                                                </li>
+                                            )}
+                                            {links && links.length > 0 && (
+                                                <li>
+                                                    <b>Tags: </b>
+                                                    {formatLinks(links)}
+                                                </li>
+                                            )}
+                                        </MetaList>
+                                    </MetaContent>
+                                </MetaCol>
                             )}
-                            {links && links.length > 0 && (
-                                <li>
-                                    <b>Tags: </b>
-                                    {formatLinks(links)}
-                                </li>
-                            )}
-                        </MetaList>
-                    </MetaContent>
-                </MetaCol>
-            </Row>
-        </ContentContainer>
+                        </Row>
+                    );
+                }}
+            </MobileContext.Consumer>
+        </MDXContainer>
     );
 }
 

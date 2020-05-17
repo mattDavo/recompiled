@@ -46,7 +46,7 @@ class WindowWidth extends React.Component<WindowWidthProps, WindowWidthState> {
 
 const Layout = (props: { children: React.ReactNode }) => {
     return (
-        <Theme color="orange">
+        <Theme color="green">
             <WindowWidth>
                 {(width) => {
                     if (width >= 800) {

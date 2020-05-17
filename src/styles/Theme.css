@@ -10,7 +10,7 @@
 }
 
 .theme-orange {
-    --primary-color: orange;
+    --primary-color: rgb(247, 132, 0);
     --primary-color-faint: rgba(255, 166, 0, 0.267);
 }
 
@@ -25,6 +25,7 @@
     --alt-background-color: #e9e9e9;
     --text-color: black;
     --secondary-text-color: #313131;
+    --hover-highlight-color: #e9e9e9;
 
     background-color: var(--background-color);
     color: var(--text-color);
@@ -53,6 +54,7 @@
         --alt-background-color: #242424;
         --text-color: rgb(240, 240, 240);
         --secondary-text-color: #949494b2;
+        --hover-highlight-color: #424242;
 
         background-color: var(--background-color);
         color: var(--text-color);

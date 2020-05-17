@@ -36,7 +36,7 @@ const IconButton = styled.button`
 
     :hover,
     :focus {
-        background-color: #424242;
+        background-color: var(--hover-highlight-color);
         outline: none;
     }
 `;
