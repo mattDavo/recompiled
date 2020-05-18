@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { graphql, Link } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import styled from 'styled-components';
 
 import MobileContext from './MobileContext';
+import { Keyword } from './Common';
 
 const maxWidth = '1140px';
 const mdxContainerMargin = '20px';
@@ -88,16 +89,39 @@ function formatTags(tags: string[]) {
         const tag = t.trim().replace(/\s+/, '-');
         if (tag.length == 0) return null;
         return (
-            <>
-                <Tag key={tag} to={`/tags/${tag}`}>
-                    {tag}
-                </Tag>{' '}
-            </>
+            <Fragment key={tag}>
+                <Tag to={`/tags/${tag}`}>{tag}</Tag>{' '}
+            </Fragment>
         );
     });
 }
 
-function formatLinks(links: string[]) {}
+function formatLinks(links: string[]) {
+    return links.map((link) => {
+        return (
+            <Fragment key={link}>
+                <a href={link}>{link}</a>{' '}
+            </Fragment>
+        );
+    });
+}
+
+function formatAuthors(authors: Author[]) {
+    return authors.map((author) => {
+        return <Keyword key={author.username}>{`@${author.username}`}</Keyword>;
+    });
+}
+
+interface Author {
+    name: string;
+    username: string;
+    contact: {
+        email: string | null;
+        github: string | null;
+        website: string | null;
+        twitter: string | null;
+    };
+}
 
 export default function DefaultMDX(props: {
     data: {
@@ -110,20 +134,29 @@ export default function DefaultMDX(props: {
                 updated: number;
                 tags: string[] | null;
                 links: string[] | null;
+                authors: string[];
             };
             fields: {
                 rootPath: string;
             };
+        };
+        allPerson: {
+            edges: {
+                node: Author;
+            }[];
         };
     };
 }) {
     const {
         data: {
             mdx: {
-                frontmatter: { tags, links },
+                frontmatter: { tags, links, authors },
             },
+            allPerson: { edges },
         },
     } = props;
+
+    const authorsData = edges.map((edge) => edge.node).filter((node) => authors && authors.includes(node.username));
 
     return (
         <MDXContainer>
@@ -151,6 +184,12 @@ export default function DefaultMDX(props: {
                                                 <b>Updated: </b>
                                                 {formatDate(props.data.mdx.frontmatter.published)}
                                             </li>
+                                            {authorsData.length > 0 && (
+                                                <li>
+                                                    <b>Authors: </b>
+                                                    {formatAuthors(authorsData)}
+                                                </li>
+                                            )}
                                             {tags && tags.length > 0 && (
                                                 <li>
                                                     <b>Tags: </b>
@@ -159,7 +198,7 @@ export default function DefaultMDX(props: {
                                             )}
                                             {links && links.length > 0 && (
                                                 <li>
-                                                    <b>Tags: </b>
+                                                    <b>Links: </b>
                                                     {formatLinks(links)}
                                                 </li>
                                             )}
@@ -186,9 +225,24 @@ export const pageQuery = graphql`
                 updated
                 tags
                 links
+                authors
             }
             fields {
                 rootPath
+            }
+        }
+        allPerson {
+            edges {
+                node {
+                    name
+                    username
+                    contact {
+                        email
+                        twitter
+                        website
+                        github
+                    }
+                }
             }
         }
     }

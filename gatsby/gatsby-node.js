@@ -1,5 +1,6 @@
 import path from 'path';
 import { createFilePath } from 'gatsby-source-filesystem';
+import people from '../data/people.json';
 
 const onCreateNode = ({ node, actions, getNode }) => {
     const { createNodeField } = actions;
@@ -119,9 +120,39 @@ const createSchemaCustomization = ({ actions }) => {
         updated: Int
         tags: [String]
         links: [String]
+        authors: [String]
+    }
+    
+    type Person implements Node {
+        name: String!
+        username: String!
+        contact: ContactDetail
+    }
+    
+    type ContactDetail {
+        email: String
+        website: String
+        twitter: String
+        github: String
     }
   `;
     createTypes(typeDefs);
 };
 
-export { onCreateNode, createPages, createSchemaCustomization };
+const sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
+    people.forEach((person) => {
+        const node = {
+            name: person.name,
+            username: person.username,
+            contact: person.contact,
+            id: createNodeId(person.username),
+            internal: {
+                type: 'Person',
+                contentDigest: createContentDigest(person),
+            },
+        };
+        actions.createNode(node);
+    });
+};
+
+export { onCreateNode, createPages, createSchemaCustomization, sourceNodes };
