@@ -33,6 +33,7 @@ const ContentContainer = styled.main`
     line-height: 1.5em;
     font-size: 18px;
     margin-left: max(calc((100vw - ${maxWidth}) / 2 - var(--sidebar-width)), ${mdxContainerMargin});
+    margin-right: ${mdxContainerMargin};
     width: 100%;
     display: block;
 `;

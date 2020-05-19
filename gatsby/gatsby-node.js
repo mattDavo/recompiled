@@ -45,6 +45,8 @@ const createPages = async ({ graphql, actions, reporter }) => {
                             tags
                             title
                             description
+                            published
+                            updated
                         }
                     }
                 }
@@ -88,9 +90,7 @@ const createPages = async ({ graphql, actions, reporter }) => {
 
                 tagData[tag].posts.push({
                     id: node.id,
-                    title: node.frontmatter.title,
-                    description: node.frontmatter.description,
-                    slug: node.frontmatter.slug,
+                    ...node.frontmatter,
                 });
             });
         }

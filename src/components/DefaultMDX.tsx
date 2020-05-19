@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import MobileContext from './MobileContext';
 import { Keyword } from './Common';
+import { formatDate } from '../helpers';
 
 const maxWidth = '1140px';
 const mdxContainerMargin = '20px';
@@ -77,12 +78,6 @@ const Tag = styled(Link)`
         background-color: var(--primary-color-faint);
     }
 `;
-
-function formatDate(unixTimestamp: number) {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const date = new Date(unixTimestamp * 1000);
-    return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
-}
 
 function formatTags(tags: string[]) {
     return tags.map((t) => {
