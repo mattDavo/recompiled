@@ -88,10 +88,7 @@ const createPages = async ({ graphql, actions, reporter }) => {
                     tagData[tag] = { posts: [] };
                 }
 
-                tagData[tag].posts.push({
-                    id: node.id,
-                    ...node.frontmatter,
-                });
+                tagData[tag].posts.push(node);
             });
         }
     });

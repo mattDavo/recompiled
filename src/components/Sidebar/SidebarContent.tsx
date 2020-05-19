@@ -26,7 +26,9 @@ function SidebarContent({ onItemClick }: SidebarContentProps) {
             <SidebarItem title="Articles" link="/articles" onClick={onItemClick} />
             <SidebarItem title="Topics" link="/topics" onClick={onItemClick} />
             <SidebarItem title="Open Source" link="/open-source" onClick={onItemClick} />
-            <SidebarItem title="Podcasts" link="/podcasts" onClick={onItemClick} />
+            <SidebarItem title="Podcasts" link="/podcasts" onClick={onItemClick}>
+                <SidebarItem title="Review" link="/podcasts/review" onClick={onItemClick} />
+            </SidebarItem>
             <SidebarItem title="Resources" link="/resources" onClick={onItemClick} />
             <SidebarItem title="Contributing" link="/contributing" onClick={onItemClick} />
         </motion.div>
