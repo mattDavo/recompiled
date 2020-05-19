@@ -16,7 +16,7 @@ export function formatPost(post: Post) {
         <ContainerLink to={post.frontmatter.slug} key={post.id}>
             <PostContainer>
                 <PostHeading>{post.frontmatter.title}</PostHeading>
-                <PostSubHeading>Updated {formatDate(post.frontmatter.updated)}</PostSubHeading>
+                <PostSubHeading>Published {formatDate(post.frontmatter.published)}</PostSubHeading>
                 {post.frontmatter.description && <PostDescription>{post.frontmatter.description}</PostDescription>}
             </PostContainer>
         </ContainerLink>
