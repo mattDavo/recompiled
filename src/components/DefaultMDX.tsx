@@ -20,6 +20,7 @@ const MDXContainer = styled.main`
     margin-right: auto;
     width: 100%;
     display: block;
+    min-width: 0;
 `;
 
 const EditThisPage = styled.a`
@@ -35,6 +36,7 @@ const Row = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    min-width: 0;
 `;
 
 const ContentCol = styled.div`
@@ -43,6 +45,7 @@ const ContentCol = styled.div`
     flex: 1 0;
     width: 100%;
     padding: 0 16px;
+    overflow-x: auto;
 `;
 
 const MetaCol = styled.div`
