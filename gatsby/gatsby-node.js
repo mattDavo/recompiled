@@ -116,9 +116,14 @@ const createSchemaCustomization = ({ actions }) => {
         published: Int!
         updated: Int!
         tags: [String]
-        links: [String]
+        links: [Link]
         authors: [String]
         wip: Boolean
+    }
+    
+    type Link {
+        title: String!
+        to: String!
     }
     
     type Person implements Node {

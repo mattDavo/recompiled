@@ -79,6 +79,10 @@ const Tag = styled(Link)`
     }
 `;
 
+const LinkList = styled.ul`
+    padding-left: 20px;
+`;
+
 function formatTags(tags: string[]) {
     return tags.map((t) => {
         const tag = t.trim().replace(/\s+/, '-');
@@ -91,12 +95,23 @@ function formatTags(tags: string[]) {
     });
 }
 
-function formatLinks(links: string[]) {
+interface ILink {
+    title: string;
+    to: string;
+}
+
+function formatLinks(links: ILink[]) {
+    console.log(links);
+
     return links.map((link) => {
         return (
-            <Fragment key={link}>
-                <a href={link}>{link}</a>{' '}
-            </Fragment>
+            link &&
+            link.title &&
+            link.to && (
+                <li key={link.to}>
+                    <a href={link.to}>{link.title}</a>{' '}
+                </li>
+            )
         );
     });
 }
@@ -128,7 +143,7 @@ export default function DefaultMDX(props: {
                 published: number;
                 updated: number;
                 tags: string[] | null;
-                links: string[] | null;
+                links: ILink[] | null;
                 authors: string[];
             };
             fields: {
@@ -194,7 +209,7 @@ export default function DefaultMDX(props: {
                                             {links && links.length > 0 && (
                                                 <li>
                                                     <b>Links: </b>
-                                                    {formatLinks(links)}
+                                                    <LinkList>{formatLinks(links)}</LinkList>
                                                 </li>
                                             )}
                                         </MetaList>
@@ -219,7 +234,10 @@ export const pageQuery = graphql`
                 published
                 updated
                 tags
-                links
+                links {
+                    title
+                    to
+                }
                 authors
             }
             fields {
