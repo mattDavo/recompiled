@@ -14,9 +14,7 @@ const PostContainer = styled.div`
 const PostHeading = styled.h2`
     margin: 5px 0;
 
-    &:hover {
-        color: var(--primary-color);
-    }
+    color: var(--heading-color);
 `;
 
 const PostSubHeading = styled.h4`
@@ -28,6 +26,12 @@ const PostSubHeading = styled.h4`
 const ContainerLink = styled(Link)`
     color: unset;
     text-decoration: unset;
+
+    --heading-color: var(--text-color);
+    &:hover,
+    &:focus {
+        --heading-color: var(--primary-color);
+    }
 `;
 
 const PostDescription = styled.p``;
