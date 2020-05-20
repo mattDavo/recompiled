@@ -1,31 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import { HashHeading1, ContentContainer } from '../components/Common';
 import { formatPost } from '../helpers';
 import Post from '../models/Post';
+import Tag from './Tag';
 
 interface TagPageContext {
     tag: string;
     posts: Post[];
 }
 
-const Tag = styled.span`
-    padding: 0em 0.25em 0.1em;
-    border-radius: 1em;
-    overflow-wrap: normal;
-    display: inline-block;
-    color: var(--primary-color);
-    background-color: var(--primary-color-faint);
-`;
-
 export default function TagPage({ pageContext }: { pageContext: TagPageContext }) {
+    const posts = pageContext.posts.sort((a, b) => b.frontmatter.published - a.frontmatter.published);
+
     return (
         <ContentContainer>
             <HashHeading1>
                 Posts with tag: <Tag>{pageContext.tag}</Tag>
             </HashHeading1>
-            {pageContext.posts.map(formatPost)}
+            {posts.map(formatPost)}
         </ContentContainer>
     );
 }

@@ -39,7 +39,7 @@ export const query = graphql`
     query PodcastReviewIndex {
         allMdx(
             filter: { fileAbsolutePath: { regex: "//content/podcasts/review/" } }
-            sort: { fields: frontmatter___published }
+            sort: { fields: frontmatter___published, order: DESC }
         ) {
             edges {
                 node {

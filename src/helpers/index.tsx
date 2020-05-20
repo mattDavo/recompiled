@@ -20,3 +20,7 @@ export function formatPost(post: Post) {
         </ContainerLink>
     );
 }
+
+export function sanitizeTags(tags: string[]) {
+    return tags.map((tag) => tag.trim().replace(/\s+/, '-'));
+}

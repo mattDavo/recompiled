@@ -45,7 +45,7 @@ const StyledUpIcon = StyledIcon.withComponent(BsChevronUp);
 const StyledDownIcon = StyledIcon.withComponent(BsChevronDown);
 
 const SidebarItemChildren = styled(motion.div)`
-    margin-left: 10px;
+    margin-left: 16px;
     margin-top: 5px;
     margin-bottom: 5px;
     padding-left: 10px;
