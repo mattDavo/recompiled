@@ -65,7 +65,7 @@ const createPages = async ({ graphql, actions, reporter }) => {
     const tagData = {};
 
     // you'll call `createPage` for each result
-    posts.forEach(({ node }, index) => {
+    posts.forEach(({ node }) => {
         createPage({
             // This is the slug you created before
             // (or `node.frontmatter.slug`)
@@ -107,17 +107,18 @@ const createSchemaCustomization = ({ actions }) => {
     const { createTypes } = actions;
     const typeDefs = `
     type Mdx implements Node {
-        frontmatter: Frontmatter
+        frontmatter: Frontmatter!
     }
     type Frontmatter {
         title: String!
         slug: String!
         description: String
-        published: Int
-        updated: Int
+        published: Int!
+        updated: Int!
         tags: [String]
         links: [String]
         authors: [String]
+        wip: Boolean
     }
     
     type Person implements Node {

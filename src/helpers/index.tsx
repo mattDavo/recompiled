@@ -10,8 +10,6 @@ export function formatDate(unixTimestamp: number): string {
 }
 
 export function formatPost(post: Post) {
-    console.log(post);
-
     return (
         <ContainerLink to={post.frontmatter.slug} key={post.id}>
             <PostContainer>

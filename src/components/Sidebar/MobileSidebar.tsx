@@ -75,7 +75,7 @@ const sidebarVariants = {
         },
     }),
     closed: {
-        clipPath: 'circle(20px at calc(100vw - 50px) calc(100vh - 50px))',
+        clipPath: 'circle(0px at calc(100vw - 50px) calc(100vh - 50px))',
         transition: {
             duration: 0,
         },

@@ -1,7 +1,8 @@
 .container {
     margin: auto;
     padding-top: 40px;
-    max-width: 1500px;
+    max-width: 800px;
+    padding: 40px 16px 0 16px;
 }
 
 .heading {
@@ -14,25 +15,6 @@
     max-width: 700px;
     line-height: 1.5em;
     margin: auto;
+    padding: 0 10px;
     font-size: 20px;
-}
-
-.postsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 20px;
-}
-
-.postContainer {
-    flex-grow: 1;
-    /* flex-basis: 0; */
-    max-width: 600px;
-    margin: 0px;
-    padding: 0px;
-}
-
-@media (min-width: 1000px) {
-    .postContainer {
-        max-width: calc((100vw - 250px) / 2);
-    }
 }
