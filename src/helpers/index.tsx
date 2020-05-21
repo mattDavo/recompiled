@@ -21,6 +21,10 @@ export function formatPost(post: Post) {
     );
 }
 
+export function sanitizeTag(tag: string) {
+    return tag.trim().replace(/\s+/g, '-').toLocaleLowerCase();
+}
+
 export function sanitizeTags(tags: string[]) {
-    return tags.map((tag) => tag.trim().replace(/\s+/, '-'));
+    return tags.map(sanitizeTag);
 }

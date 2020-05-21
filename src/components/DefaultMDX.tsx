@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import MobileContext from './MobileContext';
 import { Keyword } from './Common';
-import { formatDate } from '../helpers';
+import { formatDate, sanitizeTags } from '../helpers';
 
 const maxWidth = '1140px';
 const mdxContainerMargin = '20px';
@@ -87,6 +87,7 @@ const LinkList = styled.ul`
 `;
 
 function formatTags(tags: string[]) {
+    tags = sanitizeTags(tags);
     return tags.map((t) => {
         const tag = t.trim().replace(/\s+/, '-');
         if (tag.length == 0) return null;

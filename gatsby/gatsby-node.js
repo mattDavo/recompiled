@@ -83,7 +83,7 @@ const createPages = async ({ graphql, actions, reporter }) => {
 
         if (tags) {
             tags.forEach((t) => {
-                const tag = t.replace(/\s+/, '-');
+                const tag = t.trim().replace(/\s+/g, '-').toLocaleLowerCase();
                 if (!tagData[tag]) {
                     tagData[tag] = { posts: [] };
                 }

@@ -16,8 +16,21 @@ const HR = styled.hr`
     margin: 40px 0;
 `;
 
+const h2 = styled.h2`
+    margin-top: 50px;
+    font-size: 28px;
+`;
+
+const h3 = styled.h3`
+    margin-top: 50px;
+    font-size: 22px;
+    margin-bottom: 15px;
+`;
+
 const comps = {
     h1: HashHeading1,
+    h2,
+    h3,
     hr: HR,
     Link,
     Keyword,

@@ -1,9 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import { ContentContainer, HashHeading1 } from '../../components/Common';
-import { formatPost } from '../../helpers';
-import Post from '../../models/Post';
+import { ContentContainer, HashHeading1 } from '../components/Common';
+import { formatPost } from '../helpers';
+import Post from '../models/Post';
 
 interface PodacastReviewPageProps {
     data: {
@@ -15,7 +15,7 @@ interface PodacastReviewPageProps {
     };
 }
 
-export default function PodcastReview(props: PodacastReviewPageProps) {
+export default function ArticlesPage(props: PodacastReviewPageProps) {
     const {
         data: {
             allMdx: { edges },
@@ -26,17 +26,16 @@ export default function PodcastReview(props: PodacastReviewPageProps) {
 
     return (
         <ContentContainer>
-            <HashHeading1>Podcast Review</HashHeading1>I listen to a LOT of podcasts and here are some reviews of
-            podcasts that I found particularly insightful.
+            <HashHeading1>Articles</HashHeading1>A collection of articles written about any topic.
             {posts.map(formatPost)}
         </ContentContainer>
     );
 }
 
 export const query = graphql`
-    query PodcastReviewIndex {
+    query ArticlesIndex {
         allMdx(
-            filter: { fileAbsolutePath: { regex: "//content/podcasts/review/" } }
+            filter: { fileAbsolutePath: { regex: "//content/articles/" } }
             sort: { fields: frontmatter___published, order: DESC }
         ) {
             edges {
