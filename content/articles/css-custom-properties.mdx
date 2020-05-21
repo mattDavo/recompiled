@@ -1,0 +1,177 @@
+---
+slug: /articles/css-custom-properties
+title: CSS Custom Properties
+description: Learn about CSS custom properties and how you leverage them for better styling in your web apps.
+published: 1590055778
+updated: 1590055778
+authors:
+    - mattdavo
+tags:
+    - css
+    - styling
+    - web basics
+    - css custom properties
+links:
+    - title: MDN Docs
+      to: https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
+---
+
+# CSS Custom Properties
+
+From the [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) CSS custom properties (also known as CSS variables and cascading variables) are "entities defined by CSS authors that contain specific values to be reused throughout a document." They are super useful for providing consistent styling across a large site. You will often see them applied to the `:root` object but there are other ways we can use them cleverly for our benefit. Once a css variable is defined in the styling of an element, it is available in all of children elements.
+
+---
+
+## Syntax
+
+You declare a custom property by using a custom property name that begins with a double hyphen (`--`) and a property value that can be any valid CSS value. This is often done on the `:root` pseudo-class like so:
+
+```css
+:root {
+    --primary-color: red;
+}
+```
+
+Then we can access our custom variable with the `var()` function:
+
+```css
+.heading {
+    color: var(--primary-color);
+}
+```
+
+We can also provide a fallback value to `var()` if the custom variable may not always be defined in the scope of the ruleset.
+
+```css
+.small-button {
+    color: var(--primary-color, blue);
+}
+```
+
+---
+
+## Uses
+
+Ok now that we've seen how can define and reference our custom variables what are some great ways that we can use them?
+
+### Global Basics
+
+Clearly we can just use CSS custom properties to define some global values to reuse throughout our site. For things like colors, fonts. We'll probably just want to just use the `:root` class.
+
+```css
+:root {
+    --primary-color: lightblue;
+    --background-color: #ededed
+    --text-color: #1f1f1f;
+
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+```
+
+We can step this up a notch with a media query and implement a dark/light mode based on the user's system settings:
+
+```css
+:root {
+    --primary-color: lightblue;
+    --background-color: #ededed
+    --text-color: #1f1f1f;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #1f1f1f;
+        --text-color: #ededed;
+    }
+}
+
+:root {
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+```
+
+This will default to a light theme, but if the user has their system settings set to dark mode, then it will use a dark background and light text.
+
+### Theming
+
+We can take this a step further and use css classes to provide an array of theming options across our site. For example:
+
+```css
+.default-theme,
+.red-theme {
+    --primary-color: red;
+}
+
+.blue-theme {
+    --primary-color: blue;
+}
+
+.green-theme {
+    --primary-color: green;
+}
+```
+
+Then as we would like to change the theme, we apply a different theming class to the `body` element or even just any element that you would like the theme encapsulated in. And of course we can combine this to use a media query and have dark and light themes, with different shades of the colors.
+
+### Constants
+
+Don't forget that we can use css variables for more than just colors, we can also use them to just store dimensions. This can be useful if we want to style elements around other fixed elements, and don't want to worry about making changes in multiple places. For example:
+
+```css
+:root {
+    --navbar-height: 80px;
+}
+
+.navbar {
+    position: fixed;
+    height: var(--navbar-height);
+}
+
+.main-content {
+    margin-top: calc(var(--navbar-height) + 10px);
+}
+```
+
+Note, the use of `calc()`; we can use variable to calculate the margin beneath our navbar.
+
+### Shifting from Imperative to Declarative Programming
+
+CSS custom properties also allow us to shift our mindset from an imperative programming style to imperative which is much cleaner for web development. This is because the css variables are pushed down the element tree and child elements can use the appropriate value without needing to know any more about the state. Let's take a look at a simple example.
+
+Say, we have a `div` like this:
+
+<div style={{ borderRadius: '10px', padding: '10px', backgroundColor: 'var(--alt-background-color)' }}>
+    <h4>My Div</h4>
+    <p>My content</p>
+</div>
+
+How would you get the color of the title to change when the mouse hovers over anywhere in the `div`? In vanilla JS you might do something like:
+
+```js
+let myDiv = document.getElementById('myDiv');
+let heading = document.getElementById('heading');
+myDiv.addEventListener('mouseenter', () => {
+    heading.classList.add(classWithHeadingColor);
+});
+
+myDiv.addEventListener('mouseleave', () => {
+    heading.classList.remove(classWithHeadingColor);
+});
+```
+
+Not so nice is it? But with css variables it's super easy. We control the heading color at the level of the `div` and as the value of the css variable updates, so will the heading.
+
+```css
+.my-div {
+    --heading-color: var(--text-color);
+}
+
+.my-div:hover {
+    --heading-color: var(--primary-color);
+}
+
+.heading {
+    color: var(--heading-color);
+}
+```
