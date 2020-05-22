@@ -17,17 +17,17 @@ import '../styles/Constants.css';
 import '../styles/Layout.css';
 
 interface WindowWidthProps {
-    children: (width: number) => React.ReactNode;
+    children: (width: number | null) => React.ReactNode;
 }
 
 interface WindowWidthState {
-    width: number;
+    width: number | null;
 }
 
 class WindowWidth extends React.Component<WindowWidthProps, WindowWidthState> {
     constructor(props: WindowWidthProps) {
         super(props);
-        this.state = { width: 1000 };
+        this.state = { width: null };
     }
 
     componentDidMount() {
@@ -49,7 +49,7 @@ const Layout = (props: { children: React.ReactNode }) => {
         <Theme color="green">
             <WindowWidth>
                 {(width) => {
-                    if (width >= 800) {
+                    if (width && width >= 800) {
                         return (
                             <MobileContext.Provider value={false}>
                                 <Navbar />
@@ -60,7 +60,7 @@ const Layout = (props: { children: React.ReactNode }) => {
                                 <Footer />
                             </MobileContext.Provider>
                         );
-                    } else {
+                    } else if (width) {
                         return (
                             <MobileContext.Provider value={true}>
                                 <Navbar />
@@ -69,6 +69,8 @@ const Layout = (props: { children: React.ReactNode }) => {
                                 <Footer />
                             </MobileContext.Provider>
                         );
+                    } else {
+                        return null;
                     }
                 }}
             </WindowWidth>
