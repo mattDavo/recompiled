@@ -16,7 +16,7 @@ export const Pre = styled.pre`
     text-align: left;
     margin: 1em 0;
     padding: 0.5em;
-    overflow-x: auto;
+    overflow-x: scroll;
     border-radius: 3px;
     & .token-line {
         line-height: 1.3em;
