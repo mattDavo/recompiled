@@ -39,6 +39,7 @@
     composes: navbarItems;
 
     justify-content: flex-end;
+    height: auto;
 }
 
 .navbarItem {
