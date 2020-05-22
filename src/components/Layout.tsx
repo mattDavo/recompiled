@@ -27,7 +27,7 @@ interface WindowWidthState {
 class WindowWidth extends React.Component<WindowWidthProps, WindowWidthState> {
     constructor(props: WindowWidthProps) {
         super(props);
-        this.state = { width: 0 };
+        this.state = { width: 1000 };
     }
 
     componentDidMount() {
