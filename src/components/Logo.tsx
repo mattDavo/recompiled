@@ -26,7 +26,7 @@ export default function Logo({ height }: { height: number }) {
                 height: '100%',
             }}
         >
-            <rect width="266" rx="10" height="342" fill="var(--logo-background-color)" />
+            <rect width="266" rx="30" height="342" fill="var(--logo-background-color)" />
             <rect x="29" y="30" width="24" height="21" fill="var(--primary-color)" />
             <rect x="63" y="30" width="62" height="21" fill="var(--primary-color)" />
             <rect x="29" y="75" width="52" height="21" fill="var(--primary-color)" />

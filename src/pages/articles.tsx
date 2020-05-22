@@ -1,9 +1,10 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import { ContentContainer, HashHeading1 } from '../components/Common';
-import { formatPost } from '../helpers';
+import Seo from '../components/seo';
 import Post from '../models/Post';
+import { formatPost } from '../helpers';
+import { ContentContainer, HashHeading1 } from '../components/Common';
 
 interface PodacastReviewPageProps {
     data: {
@@ -26,6 +27,7 @@ export default function ArticlesPage(props: PodacastReviewPageProps) {
 
     return (
         <ContentContainer>
+            <Seo title="Articles" />
             <HashHeading1>Articles</HashHeading1>A collection of articles written about any topic.
             {posts.map(formatPost)}
         </ContentContainer>

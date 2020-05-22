@@ -36,7 +36,7 @@ const NavbarItemLink = ({
         <MobileContext.Consumer>
             {(isMobile) => {
                 return (
-                    <motion.div whileTap={{ scale: isMobile ? 1 : 0.95 }} whileHover={{ scale: 1.05 }}>
+                    <motion.div whileTap={{ scale: isMobile ? 1 : 0.95 }}>
                         {external ? (
                             <a href={path} className={className}>
                                 {children}

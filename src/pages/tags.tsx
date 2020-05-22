@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link, graphql } from 'gatsby';
 
 import Tag from '../components/Tag';
+import Seo from '../components/seo';
 import { sanitizeTags } from '../helpers';
 import { ContentContainer, HashHeading1 } from '../components/Common';
 
@@ -54,6 +55,7 @@ export default function TagsPage(props: TagsPageProps) {
     ).sort();
     return (
         <ContentContainer>
+            <Seo title="Tags" />
             <HashHeading1>Tags</HashHeading1>
             Browse articles by topic.
             <h1>
