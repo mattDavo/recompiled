@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link, graphql } from 'gatsby';
 
 import Tag from '../components/Tag';
-import Seo from '../components/seo';
+import Seo from '../components/Seo';
 import { sanitizeTags } from '../helpers';
 import { ContentContainer, HashHeading1 } from '../components/Common';
 

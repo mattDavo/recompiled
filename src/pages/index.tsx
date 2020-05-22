@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link, graphql } from 'gatsby';
 import { motion } from 'framer-motion';
 
-import SEO from '../components/seo';
+import SEO from '../components/Seo';
 import Post from '../models/Post';
 import styles from '../styles/Home.module.css';
 import commonStyles from '../styles/Common.module.css';

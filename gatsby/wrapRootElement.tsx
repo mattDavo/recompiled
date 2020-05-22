@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { MDXProvider } from '@mdx-js/react';
 import { HashHeading1, Keyword } from '../src/components/Common';
-import Seo from '../src/components/seo';
+import Seo from '../src/components/Seo';
 import Code from '../src/components/Code';
 
 const HR = styled.hr`

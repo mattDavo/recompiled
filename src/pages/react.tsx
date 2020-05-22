@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 
-import Seo from '../components/seo';
+import Seo from '../components/Seo';
 import { HashHeading1, ContentContainer } from '../components/Common';
 
 interface ReactPageProps {

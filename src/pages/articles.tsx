@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import Seo from '../components/seo';
+import Seo from '../components/Seo';
 import Post from '../models/Post';
 import { formatPost } from '../helpers';
 import { ContentContainer, HashHeading1 } from '../components/Common';

@@ -181,7 +181,7 @@ export default function DefaultMDX(props: {
                             <ContentCol>
                                 <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
                                 <EditThisPage
-                                    href={`https://www.github.com/mattdavo/recompiledJS/tree/master/${props.data.mdx.fields.rootPath}`}
+                                    href={`https://www.github.com/mattdavo/recompiled/tree/master/${props.data.mdx.fields.rootPath}`}
                                 >
                                     Edit this page.
                                 </EditThisPage>

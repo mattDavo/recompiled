@@ -64,7 +64,7 @@ export default function Navbar() {
             </div>
             <div className={styles.navbarItemsRight}>
                 <NavbarItemLink path="/about">About</NavbarItemLink>
-                <NavbarItemLink path="https://github.com/mattdavo/recompiledJS" external>
+                <NavbarItemLink path="https://github.com/mattdavo/recompiled" external>
                     GitHub
                 </NavbarItemLink>
                 <SearchBar />

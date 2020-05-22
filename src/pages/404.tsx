@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SEO from '../components/seo';
+import SEO from '../components/Seo';
 import { HashHeading1, ContentContainer } from '../components/Common';
 
 const NotFoundPage = () => (
