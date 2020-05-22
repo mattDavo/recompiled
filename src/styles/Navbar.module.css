@@ -17,8 +17,10 @@
 
 .title {
     font-size: 32px;
-    font-weight: 800;
+    font-weight: 400;
     text-decoration: none;
+    height: 100%;
+    vertical-align: top;
 }
 
 .title:hover,
@@ -30,6 +32,7 @@
     flex-grow: 1;
     display: flex;
     align-items: center;
+    height: var(--navbar-content-height);
 }
 
 .navbarItemsRight {

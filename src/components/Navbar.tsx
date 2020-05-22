@@ -5,6 +5,7 @@ import { useLocation } from '@reach/router';
 import { FaSearch } from 'react-icons/fa';
 
 import styles from '../styles/Navbar.module.css';
+import Logo from './Logo';
 import MobileContext from './MobileContext';
 
 const SearchBar = () => {
@@ -57,9 +58,8 @@ export default function Navbar() {
         <header className={styles.navbar}>
             <div className={styles.navbarItems}>
                 <Link to="/" className={styles.title}>
-                    <span role="img" aria-label="rocket">
-                        {'🚀 Recompiled[JT]S'}
-                    </span>
+                    <Logo height={38} />
+                    {' Recompiled[JT]S'}
                 </Link>
             </div>
             <div className={styles.navbarItemsRight}>

@@ -3,6 +3,7 @@
     --navbar-y-padding: 10px;
     --navbar-x-padding: 20px;
     --navbar-padding: var(--navbar-y-padding) var(--navbar-x-padding);
+    --navbar-content-height: calc(var(--navbar-height) - var(--navbar-y-padding) * 2);
 
     --sidebar-top: var(--navbar-height);
     --sidebar-height: calc(100vh - var(--sidebar-top));

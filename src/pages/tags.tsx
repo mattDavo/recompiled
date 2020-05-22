@@ -51,7 +51,7 @@ export default function TagsPage(props: TagsPageProps) {
                     }, []),
             ),
         ),
-    );
+    ).sort();
     return (
         <ContentContainer>
             <HashHeading1>Tags</HashHeading1>
