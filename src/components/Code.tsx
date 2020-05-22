@@ -19,6 +19,7 @@ export const Pre = styled.pre`
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
     border-radius: 3px;
+    white-space: pre;
     & .token-line {
         line-height: 1.3em;
         height: 1.3em;
