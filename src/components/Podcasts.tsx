@@ -4,6 +4,7 @@ import { FaPodcast } from 'react-icons/fa';
 import { HashHeading1, ContentContainer } from './Common';
 
 import commonStyles from '../styles/Common.module.css';
+import Note from './Note';
 
 const Card = (props: { children: React.ReactNode }) => {
     return <div className={commonStyles.card}>{props.children}</div>;
@@ -16,10 +17,6 @@ const CardTitle = (props: HTMLAttributes<HTMLHeadingElement>) => {
             {props.children}
         </h3>
     );
-};
-
-const Note = (props: { children: React.ReactNode }) => {
-    return <div className={commonStyles.note}>{props.children}</div>;
 };
 
 export default function Podcasts() {

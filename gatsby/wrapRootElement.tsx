@@ -7,6 +7,7 @@ import { MDXProvider } from '@mdx-js/react';
 import { HashHeading1, Keyword } from '../src/components/Common';
 import Seo from '../src/components/Seo';
 import Code from '../src/components/Code';
+import blockquote from '../src/components/Note';
 
 const HR = styled.hr`
     border-width: 0;
@@ -44,6 +45,7 @@ const comps = {
     Keyword,
     p,
     'p.inlineCode': InlineCode,
+    blockquote,
     pre: ({ children: { props } }) => {
         if (props.mdxType === 'code') {
             return (

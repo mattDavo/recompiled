@@ -70,9 +70,10 @@
 }
 
 .note {
-    border-left: 7px solid var(--secondary-text-color);
-    color: var(--secondary-text-color);
-    padding: 15px 0px 15px 20px;
+    margin: 0;
+    border-left: 7px solid var(--quote-color);
+    color: var(--quote-color);
+    padding: 10px 0px 10px 20px;
     font-size: 18px;
 }
 
