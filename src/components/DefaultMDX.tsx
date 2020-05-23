@@ -211,7 +211,7 @@ export default function DefaultMDX(props: {
                                             </li>
                                             <li>
                                                 <b>Updated: </b>
-                                                {formatDate(props.data.mdx.frontmatter.published)}
+                                                {formatDate(props.data.mdx.frontmatter.updated)}
                                             </li>
                                             {authorsData.length > 0 && (
                                                 <li>

@@ -58,3 +58,7 @@
     overscroll-behavior: contain;
     background-color: transparent;
 }
+
+.isSelected {
+    color: var(--primary-color);
+}

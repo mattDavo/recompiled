@@ -75,7 +75,7 @@ const SidebarItem = (props: SidebarItemProps): JSX.Element => {
     const [expanded, setExpanded] = useState(false);
 
     if (location.pathname === props.link) {
-        highlightClass = commonStyles.isPrimary;
+        highlightClass = styles.isSelected;
     }
 
     const rootItem = (
