@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Link, graphql } from 'gatsby';
 import { motion } from 'framer-motion';
@@ -35,6 +35,32 @@ const Welcome = () => {
     );
 };
 
+export function WelcomeMessage() {
+    return (
+        <Fragment>
+            Welcome to <span className={commonStyles.keyword}>Recompiled!</span>
+            {" Here you'll find articles written by "}
+            <a href="https://mattdavo.com">Matt Davidson</a>
+            {' on anything related to software engineering. Currently there is a focus on javascript/typescript using '}
+            <a href="https://reactjs.org" className={commonStyles.keyword}>
+                ReactJS
+            </a>
+            . Here you can join me on my journey to becoming the best software engineers we can be.
+            <br />
+            <br />
+            {'You will find original articles from me '}
+            <a href="https://www.swyx.io/writing/learn-in-public/">#LearnInPublic</a>. But also and most importantly,
+            links to and reviews of other resources, options in tooling, diving into open source libraries and more!
+            <br />
+            <br />
+            <Link to="/contributing" className={commonStyles.keyword}>
+                Contributions
+            </Link>
+            {' are welcomed and encouraged!'}
+        </Fragment>
+    );
+}
+
 interface HomePageProps {
     data: {
         allMdx: {
@@ -59,22 +85,7 @@ export default function Home(props: HomePageProps) {
             <SEO />
             <Welcome />
             <p className={styles.subHeading}>
-                Welcome to <span className={commonStyles.keyword}>Recompiled!</span>{' '}
-                {
-                    "Here you'll find articles written by Matt Davidson on anything related to learning frontend web development in javascript/ typescript with a focus on using "
-                }
-                <a href="https://reactjs.org" className={commonStyles.keyword}>
-                    ReactJS
-                </a>
-                . Here you can join me on my journey to becoming the best web developers we can be. You will find
-                original articles on fundamentals, links and reviews of other resources, using React libraries, options
-                in tooling, and more!
-                <br />
-                <br />
-                <Link to="/contributing" className={commonStyles.keyword}>
-                    Contributions
-                </Link>
-                {' are welcomed and encouraged!'}
+                <WelcomeMessage />
                 <br />
                 <br />
             </p>

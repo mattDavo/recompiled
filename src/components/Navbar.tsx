@@ -67,7 +67,7 @@ export default function Navbar() {
                 <NavbarItemLink path="https://github.com/mattdavo/recompiled" external>
                     GitHub
                 </NavbarItemLink>
-                <SearchBar />
+                {false && <SearchBar />}
             </div>
         </header>
     );
