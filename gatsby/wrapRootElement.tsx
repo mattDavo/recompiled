@@ -27,6 +27,14 @@ const h3 = styled.h3`
     margin-bottom: 15px;
 `;
 
+function InlineCode(props: object) {
+    return <code style={{ backgroundColor: 'gray', borderRadius: '3px' }} {...props} />;
+}
+
+const p = styled.p`
+    font-size: 16px;
+`;
+
 const comps = {
     h1: HashHeading1,
     h2,
@@ -34,6 +42,8 @@ const comps = {
     hr: HR,
     Link,
     Keyword,
+    p,
+    'p.inlineCode': InlineCode,
     pre: ({ children: { props } }) => {
         if (props.mdxType === 'code') {
             return (

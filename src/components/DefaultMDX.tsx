@@ -15,7 +15,6 @@ const MDXContainer = styled.main`
     margin: ${mdxContainerMargin};
     line-height: 1.5em;
     font-size: 18px;
-    margin-left: max(calc((100vw - ${maxWidth}) / 2 - var(--sidebar-width)), ${mdxContainerMargin});
     margin-left: auto;
     margin-right: auto;
     width: 100%;
@@ -46,6 +45,8 @@ const ContentCol = styled.div`
     width: 100%;
     padding: 0 16px;
     overflow-x: auto;
+
+    --content-margin: 16px;
 `;
 
 const MetaCol = styled.div`
@@ -176,8 +177,22 @@ export default function DefaultMDX(props: {
         <MDXContainer>
             <MobileContext.Consumer>
                 {(isMobile) => {
+                    if (isMobile) {
+                        return (
+                            <ContentCol>
+                                <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
+                                <EditThisPage
+                                    href={`https://www.github.com/mattdavo/recompiled/tree/master/${props.data.mdx.fields.rootPath}`}
+                                >
+                                    Edit this page.
+                                </EditThisPage>
+                            </ContentCol>
+                        );
+                    }
                     return (
-                        <Row style={{ flexDirection: isMobile ? 'column' : 'row' }}>
+                        <Row
+                            style={{ flexDirection: isMobile ? 'column' : 'row', display: isMobile ? 'block' : 'flex' }}
+                        >
                             <ContentCol>
                                 <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
                                 <EditThisPage
