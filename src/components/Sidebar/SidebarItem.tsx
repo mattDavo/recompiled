@@ -106,11 +106,11 @@ const SidebarItem = (props: SidebarItemProps): JSX.Element => {
                 {rootItem}
                 <motion.div variants={sidebarItemVariants}>
                     {expanded ? (
-                        <IconButton onClick={() => setExpanded(!expanded)}>
+                        <IconButton onClick={() => setExpanded(!expanded)} aria-label="Collapse Sidebar Parent Item">
                             <StyledUpIcon size="2em" />
                         </IconButton>
                     ) : (
-                        <IconButton onClick={() => setExpanded(!expanded)}>
+                        <IconButton onClick={() => setExpanded(!expanded)} aria-label="Expand Sidebar Parent Item">
                             <StyledDownIcon size="2em" />
                         </IconButton>
                     )}
