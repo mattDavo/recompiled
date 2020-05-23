@@ -59,7 +59,7 @@ export default function Navbar() {
             <div className={styles.navbarItems}>
                 <Link to="/" className={styles.title}>
                     <Logo height={38} />
-                    {' Recompiled[JT]S'}
+                    {' Recompiled'}
                 </Link>
             </div>
             <div className={styles.navbarItemsRight}>

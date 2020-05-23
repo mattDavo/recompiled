@@ -74,7 +74,8 @@
                 "ts": "never",
                 "tsx": "never"
             }
-        ]
+        ],
+        "no-console": "error"
     },
     "overrides": [
         {

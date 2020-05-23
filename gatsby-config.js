@@ -1,6 +1,6 @@
 module.exports = {
     siteMetadata: {
-        title: `Recompiled[JT]S`,
+        title: `Recompiled`,
         description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
         author: `@mattdavo`,
     },
@@ -19,8 +19,8 @@ module.exports = {
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
-                name: `Recompiled[JT]S`,
-                ['short_name']: `Recompiled[JT]S`,
+                name: `Recompiled`,
+                ['short_name']: `Recompiled`,
                 ['start_url']: `/`,
                 ['background_color']: `#663399`,
                 ['theme_color']: `#663399`,

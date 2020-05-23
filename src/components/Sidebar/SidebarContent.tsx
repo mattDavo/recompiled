@@ -18,11 +18,11 @@ function SidebarContent({ onItemClick }: SidebarContentProps) {
     return (
         <motion.div className={styles.sidebar} variants={variants}>
             <SidebarItem title="🏠 Home" link="/" onClick={onItemClick} />
-            <SidebarItem title="🌏 The Web" link="/the-web" onClick={onItemClick} />
+            {/* <SidebarItem title="🌏 The Web" link="/the-web" onClick={onItemClick} /> 
             <SidebarItem title="⚛️ React" link="/react" onClick={onItemClick}>
                 <SidebarItem title="What's React?" link="/react/what-is-react" onClick={onItemClick} />
                 <SidebarItem title="Where do I start?" link="/react/getting-started" onClick={onItemClick} />
-            </SidebarItem>
+            </SidebarItem>*/}
             <SidebarItem title="📰 Articles" link="/articles" onClick={onItemClick} />
             <SidebarItem title="🏷 Tags" link="/tags" onClick={onItemClick} />
             <SidebarItem title="👨‍👨‍👧‍👧 Open Source" link="/open-source" onClick={onItemClick} />

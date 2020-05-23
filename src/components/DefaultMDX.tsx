@@ -3,6 +3,7 @@ import { graphql, Link } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import styled from 'styled-components';
 
+import Seo from './Seo';
 import MobileContext from './MobileContext';
 import { Keyword } from './Common';
 import { formatDate, sanitizeTags } from '../helpers';
@@ -100,14 +101,12 @@ function formatTags(tags: string[]) {
     });
 }
 
-interface ILink {
+interface LinkData {
     title: string;
     to: string;
 }
 
-function formatLinks(links: ILink[]) {
-    console.log(links);
-
+function formatLinks(links: LinkData[]) {
     return links.map((link) => {
         return (
             link &&
@@ -148,7 +147,7 @@ export default function DefaultMDX(props: {
                 published: number;
                 updated: number;
                 tags: string[] | null;
-                links: ILink[] | null;
+                links: LinkData[] | null;
                 authors: string[];
             };
             fields: {
@@ -165,7 +164,7 @@ export default function DefaultMDX(props: {
     const {
         data: {
             mdx: {
-                frontmatter: { tags, links, authors },
+                frontmatter: { title, tags, links, authors },
             },
             allPerson: { edges },
         },
@@ -175,6 +174,7 @@ export default function DefaultMDX(props: {
 
     return (
         <MDXContainer>
+            <Seo title={title} />
             <MobileContext.Consumer>
                 {(isMobile) => {
                     if (isMobile) {

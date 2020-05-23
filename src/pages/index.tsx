@@ -59,7 +59,7 @@ export default function Home(props: HomePageProps) {
             <SEO />
             <Welcome />
             <p className={styles.subHeading}>
-                Welcome to <span className={commonStyles.keyword}>Recompiled[JT]S!</span>{' '}
+                Welcome to <span className={commonStyles.keyword}>Recompiled!</span>{' '}
                 {
                     "Here you'll find articles written by Matt Davidson on anything related to learning frontend web development in javascript/ typescript with a focus on using "
                 }
