@@ -1,0 +1,28 @@
+---
+slug: /podcasts/review/facebook-messenger-engineering
+title: 'Pod Review: Facebook Messenger Engineering with Mohsen Agsen'
+description: In our industry we often hear about company X's engineering culture being so great or whatever. Facebook is often thrown into this discussion and is major motivator for me wanting to work there at some point in my career. In this episode we learn about impressive (and large scale) engineering that went into the rebuild and optimisation of the Facebook Messenger app.
+published: 1590221339
+updated: 1590221342
+tags:
+    - content
+    - resources
+    - podcasts
+authors:
+    - mattdavo
+---
+
+# Podcast Review: Facebook Messenger Engineering with Mohsen Agsen
+
+## Podcast: [Software Daily](https://www.softwaredaily.com/post/5e830b546ac58c000ccf31dc/Facebook-Messenger-Engineering-with-Mohsen-Agsen)
+
+In our industry we often hear about company X's engineering culture being so great or whatever. Facebook is often thrown into this discussion and is major motivator for me wanting to work there at some point in my career. In this episode we learn about impressive (and large scale) engineering that went into the rebuild and optimisation of the Facebook Messenger app.
+
+---
+
+-   At one point there were 130 people working on the rebuild!
+-   Managed to get their app size from 130MB to 30MB!
+-   Talked about the requirements of a messaging app. How messaging user journeys are often a matter of seconds, so the app must be very fast to load. Hence they use sqlite to store a load of information (over 200 tables), which is then updated frequently from results of real api calls.
+    -   RE discords “performant” (Farhan Thawar), see how quickly you can open the app and get to a conversation compared to facebook. It’s almost no comparison.
+-   Used Objective-C, not Swift! Probably because it is still faster than Swift.
+    -   Note: this is not because Swift is slow, it’s probably because of the historically built appkit and uikit, which means there is a tremendous bridging cost.
