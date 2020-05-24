@@ -1,0 +1,32 @@
+---
+slug: /articles/refactoring-yippy
+title: 'Refactoring and Enhancements to the YippyViewController'
+description: 'My experience and learnings in refactoring Yippy.'
+published: 1570318494
+updated: 1590286505
+authors:
+    - mattdavo
+tags:
+    - swift
+    - yippy
+links:
+    - title: Yippy
+      to: 'https://yippy.mattdavo.com'
+---
+
+# Refactoring and Enhancements to the `YippyViewController`
+
+The Yippy window is the main functionality of the app so naturally a lot of the code in the app has some sort of impact on it. This can be quite scary and hard to manage as I grow the functionality of the app, so I decided to refactor the `YippyViewController` as much as possible so that the view directly reflects the model and doesn’t have any state of it’s own that can get lost and cause bugs, as well as organising it into more classes each with their own responsibility.
+
+I’m normally quite good at reorganising my code but there were a few issues that kept cropping up making it tough to find a good solution. The main motivation to organise the code cleanly is because `YippyViewController` handles so many different events from so many different places because there are a lot of events that change the Yippy view. Everything from frame size changes, new copied items, all the hotkey events that manipulate the view and the mouse actions that manipulate the view. To make this all clean I tried to make as many of the functions, functional as I could but not `static`, as it makes sense for them to need its `self`. The main focus was to avoid playing with the state all over the place because that’s where all the problems occur. State is obviously necessary to maintain the state of the application but if the state creeps into every function being read and manipulated then it becomes very difficult. It becomes very difficult why certain things may happen and it makes it very hard to make changes as it can affect so many other pieces of the code.
+
+The two most important state objects that I have to maintain is the history list and the currently selected item (which can be `nil`). There are many different events that interact with theses two objects so I’ve tried to make the code as streamlined as possible. I have used `RxSwift` to create `BehaviourRelay` objects to wrap the `history` and `selected` objects. Then I simply subscribe to the changes. I then avoid accessing the state as much as possible, only receiving the values from the notifications to the subscriptions.
+
+I have already found this to be extremely worthwhile when implementing new functionality. I’ve now added the ability to paste any of the last ten items with a keyboard shortcut, delete items, clear all history and live update the view on new copies. All of this new functionality is now implemented in very few lines. For example, to clear all the history all that is needed is:
+
+```swift
+State.main.history.accept([])
+State.main.selected.accept(nil)
+```
+
+This will handle everything that is required. Update the model, the view will update and the new (empty) history will be saved to `UserDefaults`.
