@@ -9,6 +9,10 @@
 import PageElement from './gatsby/wrapPageElement';
 import RootElement from './gatsby/wrapRootElement';
 
+import Prism from 'prism-react-renderer/prism';
+import swiftLang from 'refractor/lang/swift';
+swiftLang(Prism);
+
 export const wrapPageElement = PageElement;
 
 export const wrapRootElement = RootElement;
