@@ -17,10 +17,11 @@ const PostHeading = styled.h2`
     color: var(--heading-color);
 `;
 
-const PostSubHeading = styled.h4`
+const PostSubHeading = styled.h2`
     color: var(--secondary-text-color);
     margin: 0;
     font-size: 16px;
+    font-weight: 300;
 `;
 
 const ContainerLink = styled(Link)`

@@ -61,7 +61,7 @@ export default function TagsPage(props: TagsPageProps) {
             <h1>
                 {tags.map((tag) => {
                     return (
-                        <TagLink key={tag} to={`/tags/${tag}`}>
+                        <TagLink key={tag} to={`/tags/${tag}`} aria-label={`Tag: ${tag}`}>
                             <PaddedTag>{tag}</PaddedTag>
                         </TagLink>
                     );

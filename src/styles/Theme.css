@@ -19,7 +19,7 @@
     --primary-color-faint: rgba(0, 45, 128, 0.247);
 }
 
-.theme-move {
+.theme-mauve {
     --primary-color: #7743d6;
     --primary-color-faint: #671df057;
 }
@@ -33,6 +33,7 @@
     --quote-color: #303030;
     --secondary-text-color: #313131;
     --hover-highlight-color: #e9e9e9;
+    --inline-pre-background-color: #b8b8b8;
 
     background-color: var(--background-color);
     color: var(--text-color);
@@ -55,7 +56,7 @@
         --primary-color-faint: rgba(27, 98, 230, 0.24);
     }
 
-    .theme-move {
+    .theme-mauve {
         --primary-color: #7743d6;
         --primary-color-faint: #671df057;
     }
@@ -67,8 +68,9 @@
         --logo-background-color: #505050;
         --text-color: rgb(240, 240, 240);
         --quote-color: #979797;
-        --secondary-text-color: #949494b2;
+        --secondary-text-color: #b1b1b1bd;
         --hover-highlight-color: #424242;
+        --inline-pre-background-color: #1b1b1b;
 
         background-color: var(--background-color);
         color: var(--text-color);

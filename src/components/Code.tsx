@@ -11,7 +11,7 @@ export const LineNo = styled.span`
     display: inline-block;
     width: 2em;
     user-select: none;
-    opacity: 0.3;
+    opacity: 0.7;
 `;
 
 export const Pre = styled.pre`
@@ -26,6 +26,7 @@ export const Pre = styled.pre`
     white-space: pre;
     font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
+    background-color: black;
 
     @media only screen and (max-width: 799px) {
         margin-left: calc(-1 * var(--content-margin));
@@ -41,7 +42,7 @@ export default function Code({ codeString, language }: { codeString: string; lan
                 <MobileContent.Consumer>
                     {(isMobile) => {
                         return (
-                            <Pre className={className} style={style}>
+                            <Pre className={className} style={style} tabIndex={0}>
                                 {tokens.map((line, i) => (
                                     <div {...getLineProps({ line, key: i })}>
                                         {!isMobile && <LineNo>{i + 1}</LineNo>}

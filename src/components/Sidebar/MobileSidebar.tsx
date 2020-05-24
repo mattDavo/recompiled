@@ -29,7 +29,7 @@ interface SidebarToggleProps {
 }
 
 export const MenuToggle = ({ toggle }: SidebarToggleProps) => (
-    <FixedToggle onClick={toggle} whileTap={{ scale: 0.9 }}>
+    <FixedToggle onClick={toggle} whileTap={{ scale: 0.9 }} aria-label="Toggle Sidebar">
         <svg width="23" height="23" viewBox="0 -3 23 23">
             <Path
                 variants={{
@@ -94,13 +94,13 @@ function MobileSidebar() {
 
     return (
         <motion.nav initial={false} animate={isOpen ? 'open' : 'closed'}>
-            <nav className={navStyle}>
+            <div className={navStyle}>
                 <SidebarContent
                     onItemClick={() => {
                         toggleOpen();
                     }}
                 />
-            </nav>
+            </div>
             <MenuToggle
                 toggle={() => {
                     toggleOpen();

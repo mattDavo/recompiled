@@ -77,7 +77,7 @@ export default function Home(props: HomePageProps) {
     const posts = edges.map((edge) => edge.node);
 
     return (
-        <div className={styles.container}>
+        <main className={styles.container}>
             <SEO />
             <Welcome />
             <p className={styles.subHeading}>
@@ -88,7 +88,7 @@ export default function Home(props: HomePageProps) {
             <hr className={commonStyles.divider} />
             <HashHeading1 className={commonStyles.heading2}>Latest</HashHeading1>
             <Posts posts={posts} />
-        </div>
+        </main>
     );
 }
 

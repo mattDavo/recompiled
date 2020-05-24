@@ -29,7 +29,12 @@ const h3 = styled.h3`
 `;
 
 function InlineCode(props: object) {
-    return <code style={{ backgroundColor: 'gray', borderRadius: '3px' }} {...props} />;
+    return (
+        <code
+            style={{ backgroundColor: 'var(--inline-pre-background-color)', borderRadius: '3px', padding: '0 3px' }}
+            {...props}
+        />
+    );
 }
 
 const p = styled.p`

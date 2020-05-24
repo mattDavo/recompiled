@@ -26,7 +26,7 @@ const MDXContainer = styled.main`
 const EditThisPage = styled.a`
     margin-top: 100px;
     display: inline-block;
-    opacity: 0.6;
+    opacity: 0.75;
     :hover {
         opacity: 0.9;
     }
@@ -95,7 +95,9 @@ function formatTags(tags: string[]) {
         if (tag.length == 0) return null;
         return (
             <Fragment key={tag}>
-                <Tag to={`/tags/${tag}`}>{tag}</Tag>{' '}
+                <Tag to={`/tags/${tag}`} aria-label={`Tag: ${tag}`}>
+                    {tag}
+                </Tag>{' '}
             </Fragment>
         );
     });
