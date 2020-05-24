@@ -42,9 +42,7 @@ export function WelcomeMessage() {
             {" Here you'll find articles written by "}
             <a href="https://mattdavo.com">Matt Davidson</a>
             {' on anything related to software engineering. Currently there is a focus on javascript/typescript using '}
-            <a href="https://reactjs.org" className={commonStyles.keyword}>
-                ReactJS
-            </a>
+            <a href="https://reactjs.org">ReactJS</a>
             . Here you can join me on my journey to becoming the best software engineers we can be.
             <br />
             <br />
@@ -53,9 +51,7 @@ export function WelcomeMessage() {
             links to and reviews of other resources, options in tooling, diving into open source libraries and more!
             <br />
             <br />
-            <Link to="/contributing" className={commonStyles.keyword}>
-                Contributions
-            </Link>
+            <Link to="/contributing">Contributions</Link>
             {' are welcomed and encouraged!'}
         </Fragment>
     );
