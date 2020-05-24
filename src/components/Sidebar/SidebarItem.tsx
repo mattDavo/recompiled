@@ -6,7 +6,6 @@ import { useLocation } from '@reach/router';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 
 import styles from '../../styles/Sidebar.module.css';
-import commonStyles from '../../styles/Common.module.css';
 import MobileContext from '../MobileContext';
 
 const RelativeDiv = styled.div`
