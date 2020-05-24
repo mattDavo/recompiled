@@ -11,7 +11,9 @@ import RootElement from './gatsby/wrapRootElement';
 
 import Prism from 'prism-react-renderer/prism';
 import swiftLang from 'refractor/lang/swift';
+import rubyLang from 'refractor/lang/ruby';
 swiftLang(Prism);
+rubyLang(Prism);
 
 export const wrapPageElement = PageElement;
 
