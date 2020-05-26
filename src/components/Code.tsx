@@ -42,7 +42,8 @@ export default function Code({ codeString, language }: { codeString: string; lan
                 <MobileContent.Consumer>
                     {(isMobile) => {
                         return (
-                            <Pre className={className} style={style} tabIndex={0}>
+                            // eslint-disable-next-line styled-components-a11y/no-noninteractive-tabindex
+                            <Pre className={className} style={style} tabIndex={0} role="region" aria-label="Code Block">
                                 {tokens.map((line, i) => (
                                     <div {...getLineProps({ line, key: i })}>
                                         {!isMobile && <LineNo>{i + 1}</LineNo>}
