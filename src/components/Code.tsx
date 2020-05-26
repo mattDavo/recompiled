@@ -20,7 +20,7 @@ export const Pre = styled.pre`
     padding: 0.5em;
     border-radius: 5px;
     text-align: left;
-    overflow-x: scroll;
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch !important;
     white-space: pre-wrap;
     white-space: pre;
