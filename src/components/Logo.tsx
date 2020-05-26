@@ -1,10 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const LogoContainer = styled.div`
-    display: inline-block;
-    vertical-align: middle;
-`;
 
 export default function Logo({ height }: { height: number }) {
     const baseHeight = 342;
@@ -13,7 +7,6 @@ export default function Logo({ height }: { height: number }) {
     const width = (height * baseWidth) / baseHeight;
 
     return (
-        // <LogoContainer>
         <svg
             width={width}
             height={height}
@@ -43,6 +36,5 @@ export default function Logo({ height }: { height: number }) {
             <rect x="29" y="291" width="39" height="21" fill="var(--primary-color)" />
             <rect x="78" y="291" width="109" height="21" fill="var(--primary-color)" />
         </svg>
-        // </LogoContainer>
     );
 }
