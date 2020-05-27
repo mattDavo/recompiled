@@ -1,20 +1,34 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import theme from 'prism-react-renderer/themes/vsDark';
 
 import MobileContent from './MobileContext';
 
-export const LineNo = styled.span`
+const LineNo = styled.span`
     display: inline-block;
     width: 2em;
     user-select: none;
     opacity: 0.7;
 `;
 
-export const Pre = styled.pre`
+const FileName = styled.span`
+    display: block;
+    margin: 10px 20px;
+    color: var(--text-color);
+    opacity: 0.8;
+`;
+
+const Divider = styled.div`
+    border: none;
+    background-color: var(--alt-background-color);
+    height: 2px;
+    margin: 5px -0.5em;
+`;
+
+const Pre = styled.pre`
     display: block;
     margin: 1em 0;
     padding: 0.5em;
@@ -36,14 +50,24 @@ export const Pre = styled.pre`
 `;
 
 export default function Code({ codeString, language }: { codeString: string; language: Language }) {
+    const languageMatch = language.match(/^([^:]*)/);
+    const actualLanguage = languageMatch && languageMatch[1];
+    const filenameMatch = language.match(/title=([^:]*)/);
+    const filename = filenameMatch && filenameMatch[1];
     return (
-        <Highlight {...defaultProps} code={codeString} language={language} theme={theme}>
+        <Highlight {...defaultProps} code={codeString} language={actualLanguage as Language} theme={theme}>
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <MobileContent.Consumer>
                     {(isMobile) => {
                         return (
                             // eslint-disable-next-line styled-components-a11y/no-noninteractive-tabindex
                             <Pre className={className} style={style} tabIndex={0} role="region" aria-label="Code Block">
+                                {filename && (
+                                    <Fragment>
+                                        <FileName>{filename}</FileName>
+                                        <Divider />
+                                    </Fragment>
+                                )}
                                 {tokens.map((line, i) => (
                                     <div {...getLineProps({ line, key: i })}>
                                         {!isMobile && <LineNo>{i + 1}</LineNo>}
