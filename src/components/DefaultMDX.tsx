@@ -146,6 +146,7 @@ export default function DefaultMDX(props: {
             body: string;
             frontmatter: {
                 title: string;
+                description: string;
                 published: number;
                 updated: number;
                 tags: string[] | null;
@@ -166,7 +167,7 @@ export default function DefaultMDX(props: {
     const {
         data: {
             mdx: {
-                frontmatter: { title, tags, links, authors },
+                frontmatter: { title, description, tags, links, authors },
             },
             allPerson: { edges },
         },
@@ -176,7 +177,7 @@ export default function DefaultMDX(props: {
 
     return (
         <MDXContainer>
-            <Seo title={title} />
+            <Seo title={title} description={description} />
             <MobileContext.Consumer>
                 {(isMobile) => {
                     if (isMobile) {
@@ -252,6 +253,7 @@ export const pageQuery = graphql`
             body
             frontmatter {
                 title
+                description
                 published
                 updated
                 tags
