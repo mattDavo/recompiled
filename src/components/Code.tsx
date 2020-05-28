@@ -50,9 +50,9 @@ const Pre = styled.pre`
 `;
 
 export default function Code({ codeString, language }: { codeString: string; language: Language }) {
-    const languageMatch = language.match(/^([^:]*)/);
+    const languageMatch = language && language.match(/^([^:]*)/);
     const actualLanguage = languageMatch && languageMatch[1];
-    const filenameMatch = language.match(/title=([^:]*)/);
+    const filenameMatch = language && language.match(/title=([^:]*)/);
     const filename = filenameMatch && filenameMatch[1];
     return (
         <Highlight {...defaultProps} code={codeString} language={actualLanguage as Language} theme={theme}>
