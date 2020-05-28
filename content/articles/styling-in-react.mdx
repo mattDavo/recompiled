@@ -1,0 +1,260 @@
+---
+slug: /articles/styling-in-react
+title: 'Styling in ReactJS'
+description: "We explore the many different ways we can style our apps in ReactJS. What's good about them and any potential issues."
+published: 1590669482
+updated: 1590669482
+authors:
+  - mattdavo
+tags:
+  - react
+  - css
+  - react styling
+  - styled components
+  - css in js
+  - css modules
+links:
+  - title: React Style Prop
+    to: 'https://reactjs.org/docs/dom-elements.html#style'
+  - title: NPM classnames
+    to: 'https://www.npmjs.com/package/classnames#usage-with-reactjs'
+  - title: BEM Methodology
+    to: 'http://getbem.com/'
+  - title: 'What actualy is CSS in JS'
+    to: 'https://medium.com/dailyjs/what-is-actually-css-in-js-f2f529a2757'
+  - title: CSS Modules
+    to: 'https://github.com/css-modules/css-modules'
+  - title: Styled Components
+    to: 'https://styled-components.com/'
+  - title: Emotion
+    to: 'https://emotion.sh/docs/introduction'
+  - title: The State of CSS
+    to: 'https://medium.com/styled-components/announcing-styled-components-v4-better-faster-stronger-3fe1aba1a112'
+  - title: Improvements in Styled Components v4
+    to: 'https://medium.com/styled-components/announcing-styled-components-v4-better-faster-stronger-3fe1aba1a112'
+  - title: 'Styled Components vs. CSS Stylesheets'
+    to: 'https://getstream.io/blog/styled-components-vs-css-stylesheets/'
+  - title: CSS in JS Options
+    to: 'http://michelebertoli.github.io/css-in-js/'
+---
+
+# Styling in ReactJS
+
+The reason we all love React is that it allows us to build views in a fast and scalable way. When build a React application, the components tend to garner all of the attention and we will do whatever we can make them easy to use and maintain. However, when styling our components there is often a lot less thought around how we should maintain our **and** how our approach to styling impacts the rest of our React development. Today we'll take a look at some of the options we have for styling in React, what's good about them and what isn't so great.
+
+---
+
+## Apply Styling to Components
+
+First let's look at the ways we can apply styles to our components.
+
+### The `style` prop
+
+The simplest way to add styling to a component is to just add them in the [`style` prop](https://reactjs.org/docs/dom-elements.html#style) like so:
+
+```jsx
+const Card = ({ children }) => {
+  return (
+    <div
+      style={{
+        backgroundColor: 'green',
+        borderRadius: '10px',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+```
+
+However, adding styles this way is not recommended by the React team, and only really good for convenience and dynamically computed styles. Using CSS classes instead is generally more performant and cleaner for your codebase as it promotes reusability and composition.
+
+### The `className` prop
+
+You can use the [`className` prop](https://reactjs.org/docs/dom-elements.html#classname) to apply CSS classes to your components just like you would with the `class` attribute in HTML.
+
+```jsx
+const Card = ({ children }) => {
+  return <div className="card">{children}</div>;
+};
+```
+
+And of course can apply multiple classes, conditionally if you like:
+
+```jsx
+const Card = ({ children, selected }) => {
+  const className = 'card' + (selected ? ' selected' : '');
+  return <div className={className}>{children}</div>;
+};
+```
+
+> Note: Check out the [classnames package](https://www.npmjs.com/package/classnames#usage-with-reactjs) if you find yourself continually writing this kind of pattern for choosing class names based on the current state.
+
+Ok, now that we've cleared all that up we know the 2 ways that we can add styling to a component. This shouldn't be too surprising as it just mimics that of HTML. Now let's dig into the different ways that we can approach the defining of our styles.
+
+---
+
+## Writing CSS for React Components
+
+I have always found styling elements for the web very easy to get messy. Whilst CSS is great and has come a long way over the years, especially with more consistent browser support, there will always be confusing quirks that make us frustrated and confused as to why things aren't working how we would like. I think some of that is to do with a lot less certainty over our styling. Of course we can always break open Chrome Dev Tools and see what styles are being applied/overriden, but there is far less certainty of what styles are being used and which ones aren't compared to all other parts of our code base. I am always much more nervous about deleting a CSS ruleset than a function, because if we delete a function and it's used, our code will either crash or not compile and we'll know pretty quickly. In comparison our deleted CSS ruleset problem can be much more subtle.
+
+Does this mean that we should write styles in a statically typed languange? I don't think so. Does this mean that we should write extensive style testing for all of our elements? I also don't think so, the tests would be quite brittle and it would make removing (in reality) unused rulesets no easier, as it would cause some tests to fail and we're still stuck trying to figure out if our styles are needed.
+
+But it's not all doom and gloom! Styling doesn't have to be scary, we just have to be careful in our consideration of how we write our CSS. Ok let's look at the options.
+
+### A plain old `.css` file
+
+We can define our styles in normal `.css` files and import them in the files of our React components that use them.
+
+```js
+import 'Card.css';
+```
+
+Now as CSS is global, any styles defined like this will be global. So once the stylesheet is loaded, the rulesets will be applied to the entire site. This is an important consideration. This approach can be very nice for defining the your very general purpose styles, and I would recommend keeping it that way. The less your component specific styles leak into the global styles, the better.
+
+### CSS Modules
+
+[CSS Modules](https://github.com/css-modules/css-modules) is the [gateway drug of the CSS-in-JS ecosystem](https://dev.to/siddharthkp/why-do-we-keep-talking-about-css-in-js-35i8). Since the inception of CSS, there have always been issues with the global scope of CSS. The issue of eventual name clashes has been combated in multiple ways. We can deal with this issue by simply naming things differently, but that isn't always a nice solution. Or we can be a bit more sophisticated and use [descendant combinators](https://developer.mozilla.org/en-US/docs/Web/CSS/Descendant_combinator) styling classes within a kind of namespace. We can also employ a naming methodology like [BEM](http://getbem.com/). All methods have some benefits but require a general conformance from the developers to adhere to the standard set.
+
+This is where CSS Modules comes in. They provide local file scoping by default. Each CSS (module) file is compiled into global CSS with a namespacing extension that makes it unique. By importing the classes in JS and injecting them into our elements, we are able to apply the classes with local scope. For example:
+
+```css:title=Home.css
+.title {
+  color: red;
+  font-size: 40px;
+  text-align: center;
+}
+```
+
+```js:title=Home.js
+import styles from './Home.css';
+
+const Title = () => <h1 className={styles.title}>Welcome!</h1>;
+```
+
+Here the actual element in the DOM will look something like:
+
+```html
+<h1 class="Home--title--1wfPf">Welcome!</h1>
+```
+
+This can clearly be very useful for safely styling in smaller stylesheets, making your code much more maintainable.
+
+### CSS in JS
+
+Now that we've seen CSS Modules and how powerful and liberating locally scoped styles can be. What if we took it a step further? CSS in JS is not a single framework/library but a methodology that uses JavaScript for writing your styles. This solves the global scope issue of CSS like CSS Modules, but in addition it solves issues that more tied to the nature of CSS.
+
+**Dependencies are much clearer** with CSS in JS. CSS offers so much code reusability that it can be detremental, as a single ruleset can be applied to many different types of HTML elements in combination with many other rulesets. As your codebase grows and more elements are referencing more rulesets, it becomes very difficult to make changes confidently, knowing which other elements across your whole site might be affected. In this case it's often easiest to add another CSS class, which only digs a deeper hole.
+
+With CSS in JS, dependencies become so much clearer because our styles will be always be referenced statically and with proper tooling you can easily jump through your code to see where the styles are coming from. This also helps **eliminate dead code** or unused rulesets which can be very difficult with regular CSS and even CSS modules.
+
+Another great option that CSS in JS is a different approach to **state-based styling**. In the past a common way to pattern to style an element might be to use different selectors for different states. For example `.has-danger`, `.has-warning`, `.has-success`. With CSS in JS we're able to define our styles in the context of the state, which can be quite powerful. This might be great for applying themes to your application, however I fear that it might be a bit of an overstep away from CSS, **coupling the CSS too tightly with the state**. Which brings me to my next observation with CSS in JS.
+
+Whilst some CSS in JS libraries still have quite a lot of support for natural CSS, it is clear to me that it promotes a **one-to-one mapping between styles and components**. This is a massive change of pace from normal HTML/CSS development. We have gone from being able to target every single element in our site with a single ruleset to only being able to target a single component. **I'm not 100% sold** on this concept as it may be a bit of an overreaction to the frustrations of CSS.
+
+In vanilla CSS we tend to try and reuse each ruleset too much and to our demise, but I can see this methodology very quickly going the other way where so little of our CSS is reused. It is very easy to start out building a small view and all of a sudden you have a few hundred lines of CSS in JS which is not at all resuable. But this is not all bad, as programmers we tend to try adhere too closely to the 'Don't Repeat Yourself' (DRY) principle. Maybe CSS in JS is what we need?
+
+However, this paradigm shift does not mean that we cannot write our styles in a reusable manner. There are still options to. In fact, I see this as a great way to potentially harness the resusability and composition of React components. Additionally, a tighter coupling between components and styles is not all bad; CSS is not so distant from HTML, for example with the flexbox which is somewhat reliant on elements in the structure having the appropriate attributes.
+
+Another downfall of using CSS in JS is that it's another 10-15kB that's your adding to your package that the end user requires. This may not be a large issue for you but is a worthwhile consideration. Here is a [list and comparison of different CSS in JS libraries](http://michelebertoli.github.io/css-in-js/). Styled Components and Emotion are two of the most popular, and we're going to have a look at Styled Components next.
+
+### [Styled Components 💅](https://styled-components.com/)
+
+Creating and using a styled component is as simple as the following:
+
+```js
+import styled from 'styled-components';
+
+const Button = styled.button`
+  border-radius: 5px;
+  color: black;
+  margin: 0px;
+  padding: 5px;
+`;
+
+export function Page() {
+  return (
+    <div>
+      <Button>Press me!</Button>
+    </div>
+  );
+}
+```
+
+We can now extend this Button to more specific cases if we like:
+
+```js
+const BlueButton = styled.button`
+  background-color: blue;
+`;
+```
+
+Or if we like we can use this as an anchor instead:
+
+```js
+export function Page() {
+  return (
+    <div>
+      <BlueButton as="a"></BlueButton>
+    </div>
+  );
+}
+```
+
+This is where I have a bit of frustration with styled components. There isn't a great way to share styles across different types of elements. It isn't very nice to be throwing the `as` keyword around everywhere. In my opinion these are the best ways:
+
+```js
+import styled, { css } from 'styled-components';
+
+// Option 1
+
+const Primary = css`
+  color: blue;
+`;
+
+const PrimaryH1 = styled.h1`
+  ${Primary}
+`;
+
+const PrimaryH2 = styled.h2`
+  ${Primary}
+`;
+
+// Option 2
+
+const Primary = styled.span`
+  color: blue;
+`;
+
+const PrimaryH1 = Primary.atts({ as: 'h1' })`
+  ${Primary}
+`;
+
+const PrimaryH2 = Primary.atts({ as: 'h2' })`
+  ${Primary}
+`;
+```
+
+This isn't where styled components stops, it also supports adapting based on props (state-based), automatic vendor prefixing, pseudoelements, pseudoselectors, nesting and media queries like normal. But I'll leave it to you can go and read the full [Styled Components Docs](https://styled-components.com/docs/basics) for all of its functionality
+
+Despite the styling bugs you will eliminate by using Styled Components, there is actually the potential to easily introduce accessibility (a11y) bugs. The great [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y) helps catch bugs by highlighting all sorts of a11y issues, however it is only good for a small set of tags. To my knowledge, all HTML tags and well known components like `Link` which is normally an anchor. If you use styled components it is very easy to hide these bugs. For example:
+
+```js
+const Bug = styled.a``;
+
+export function Page() {
+  return (
+    <div>
+      <Bug />
+    </div>
+  );
+}
+```
+
+This is enough for the eslint plugin to not catch your bug. Fortunately [eslint-plugin-styled-components-a11y](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y) is being worked on, but it is no where near the completeness of `eslint-plugin-jsx-a11y`. Just something to be careful of.
+
+---
+
+## Conclusion ✌️
+
+Well we've definitely seen that there are a lot of options when it comes to styling in React. To me there is no clear winner, all options have their features and problems. When choosing how you will style your next React app it is important that you consider all the options, figure out what will not work for you and how you can combat the issues of the other options.
