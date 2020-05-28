@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/jsx-key */
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'gatsby';
 import { MDXProvider } from '@mdx-js/react';
 import { HashHeading1, Keyword } from '../src/components/Common';
@@ -37,8 +37,17 @@ function InlineCode(props: object) {
     );
 }
 
-const p = styled.p`
+const base = css`
     font-size: 16px;
+`;
+
+const p = styled.p`
+    ${base}
+`;
+
+const Primary = styled.span`
+    ${base}
+    color: var(--primary-color);
 `;
 
 const comps = {
@@ -51,6 +60,8 @@ const comps = {
     p,
     'p.inlineCode': InlineCode,
     blockquote,
+    Primary,
+    strong: Primary,
     pre: ({ children: { props } }) => {
         if (props.mdxType === 'code') {
             return (
