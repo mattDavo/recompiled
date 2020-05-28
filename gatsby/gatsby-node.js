@@ -2,6 +2,8 @@ import path from 'path';
 import { createFilePath } from 'gatsby-source-filesystem';
 import people from '../data/people.json';
 
+const { NODE_ENV } = process.env;
+
 const onCreateNode = ({ node, actions, getNode }) => {
     const { createNodeField } = actions;
     // you only want to operate on `Mdx` nodes. If you had content from a
@@ -47,6 +49,7 @@ const createPages = async ({ graphql, actions, reporter }) => {
                             description
                             published
                             updated
+                            wip
                         }
                     }
                 }
@@ -66,6 +69,10 @@ const createPages = async ({ graphql, actions, reporter }) => {
 
     // you'll call `createPage` for each result
     posts.forEach(({ node }) => {
+        if (NODE_ENV != 'development' && node.frontmatter.wip) {
+            return;
+        }
+
         createPage({
             // This is the slug you created before
             // (or `node.frontmatter.slug`)
