@@ -69,7 +69,7 @@ const createPages = async ({ graphql, actions, reporter }) => {
 
     // you'll call `createPage` for each result
     posts.forEach(({ node }) => {
-        if (NODE_ENV == 'development' || node.frontmatter.wip) {
+        if (NODE_ENV == 'development' || !node.frontmatter.wip) {
             createPage({
                 // This is the slug you created before
                 // (or `node.frontmatter.slug`)
