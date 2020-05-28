@@ -1,0 +1,69 @@
+---
+slug: /articles/different-way-to-style-in-react
+title: 'A Different Way to Style in React'
+description: "We explore the many different ways we can style our apps in ReactJS. What's good about them and any potential issues."
+published: 1590411957
+updated: 1590411957
+authors:
+  - mattdavo
+tags:
+  - react
+  - css
+  - react styling
+  - styled components
+links:
+  - title: CSS Modules
+    to: 'https://github.com/css-modules/css-modules'
+  - title: Styled Components
+    to: 'https://styled-components.com/'
+  - title: Emotion
+    to: 'https://emotion.sh/docs/introduction'
+  - title: The State of CSS
+    to: 'https://medium.com/styled-components/announcing-styled-components-v4-better-faster-stronger-3fe1aba1a112'
+  - title: Improvements in Styled Components v4
+    to: 'https://medium.com/styled-components/announcing-styled-components-v4-better-faster-stronger-3fe1aba1a112'
+  - title: 'Styled Components vs. CSS Stylesheets'
+    to: 'https://getstream.io/blog/styled-components-vs-css-stylesheets/'
+wip: true
+---
+
+# A Different Way to Style in React
+
+I am still trying to figure out the best way to style components in a React application. There are so many options: CSS files, CSS modules, raw CSS in JS, or CSS in JS with libraries like [styled components](https://styled-components.com/) and [Emotion](https://emotion.sh/docs/introduction). All of them have some great benefits, whilst they all have their issues.
+
+At one end of the spectrum using normal globally scoped css files will generally be the best performance you can achieve, however can lead to a confusing codebase where it is unclear what styles are being used. Often resulting in bloated stylesheets containing way more rulesets than are actually used.
+
+On the opposite end of the spectrum we have nice CSS in JS libraries like **styled components** which provide great locally scoped styles with a ton of useful functionality, allowing you to easily just define CSS rulesets as components. However, it also has its drawbacks, there are [some concerns with performance](https://medium.com/ansarada-thinking/styled-components-v4-the-good-the-bad-and-something-completely-different-e891139e0138), it does not promote using the beautiful cascading and composing nature of CSS, and masking of accessiblity issues.
+
+```jsx
+import React, { cloneElement, Children, isValidElement, Fragment } from 'react';
+
+function ApplyStyle({ className, isActive, children }) {
+  return (
+    <Fragment>
+      {Children.map(children, (child) => {
+        if (
+          isValidElement(child) &&
+          (typeof isActive == 'undefined' || isActive === true)
+        ) {
+          const mergedClassName =
+            (child.props.className || '') + ' ' + className;
+          return cloneElement(child, { className: mergedClassName });
+        }
+
+        return child;
+      })}
+    </Fragment>
+  );
+}
+
+export function Selected({ isActive, children }) {
+  return ApplyStyle({ className: 'selected', isActive, children });
+}
+
+function Example() {
+  <Selected>
+    <span>Home</span>
+  </Selected>;
+}
+```
