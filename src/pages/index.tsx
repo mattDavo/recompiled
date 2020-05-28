@@ -94,7 +94,11 @@ export default function Home(props: HomePageProps) {
 
 export const query = graphql`
     query HomeFeed {
-        allMdx(sort: { fields: frontmatter___published, order: DESC }, limit: 10) {
+        allMdx(
+            sort: { fields: frontmatter___published, order: DESC }
+            limit: 10
+            filter: { frontmatter: { wip: { ne: true } } }
+        ) {
             edges {
                 node {
                     id
