@@ -69,34 +69,32 @@ const createPages = async ({ graphql, actions, reporter }) => {
 
     // you'll call `createPage` for each result
     posts.forEach(({ node }) => {
-        if (NODE_ENV != 'development' && node.frontmatter.wip) {
-            return;
-        }
-
-        createPage({
-            // This is the slug you created before
-            // (or `node.frontmatter.slug`)
-            path: node.frontmatter.slug,
-            // This component will wrap our MDX content
-            component: mdxTemplate,
-            // You can use the values in this context in
-            // our page layout component
-            context: { id: node.id },
-        });
-
-        const {
-            frontmatter: { tags },
-        } = node;
-
-        if (tags) {
-            tags.forEach((t) => {
-                const tag = t.trim().replace(/\s+/g, '-').toLocaleLowerCase();
-                if (!tagData[tag]) {
-                    tagData[tag] = { posts: [] };
-                }
-
-                tagData[tag].posts.push(node);
+        if (NODE_ENV == 'development' || node.frontmatter.wip) {
+            createPage({
+                // This is the slug you created before
+                // (or `node.frontmatter.slug`)
+                path: node.frontmatter.slug,
+                // This component will wrap our MDX content
+                component: mdxTemplate,
+                // You can use the values in this context in
+                // our page layout component
+                context: { id: node.id },
             });
+
+            const {
+                frontmatter: { tags },
+            } = node;
+
+            if (tags) {
+                tags.forEach((t) => {
+                    const tag = t.trim().replace(/\s+/g, '-').toLocaleLowerCase();
+                    if (!tagData[tag]) {
+                        tagData[tag] = { posts: [] };
+                    }
+
+                    tagData[tag].posts.push(node);
+                });
+            }
         }
     });
 

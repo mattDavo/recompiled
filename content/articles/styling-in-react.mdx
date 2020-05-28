@@ -1,7 +1,7 @@
 ---
 slug: /articles/styling-in-react
 title: 'Styling in ReactJS'
-description: "We explore the many different ways we can style our apps in ReactJS. What's good about them and any potential issues."
+description: "Explore the different ways we can style our apps in ReactJS. What's good about them and any potential issues."
 published: 1590669482
 updated: 1590669482
 authors:
@@ -40,7 +40,7 @@ links:
 
 # Styling in ReactJS
 
-The reason we all love React is that it allows us to build views in a fast and scalable way. When build a React application, the components tend to garner all of the attention and we will do whatever we can make them easy to use and maintain. However, when styling our components there is often a lot less thought around how we should maintain our **and** how our approach to styling impacts the rest of our React development. Today we'll take a look at some of the options we have for styling in React, what's good about them and what isn't so great.
+The reason we all love React is that it allows us to build views in a fast and scalable way. When we build a React application, the components tend to garner all of the attention and we will do whatever we can make them easy to use and maintain. However, when styling our components there is often a lot less thought around how we should maintain our styles and how our approach to styling impacts the rest of our React development. Today we'll take a look at some of the options we have for styling in React, what's good about them and what isn't so great.
 
 ---
 
@@ -90,13 +90,13 @@ const Card = ({ children, selected }) => {
 
 > Note: Check out the [classnames package](https://www.npmjs.com/package/classnames#usage-with-reactjs) if you find yourself continually writing this kind of pattern for choosing class names based on the current state.
 
-Ok, now that we've cleared all that up we know the 2 ways that we can add styling to a component. This shouldn't be too surprising as it just mimics that of HTML. Now let's dig into the different ways that we can approach the defining of our styles.
+Ok, now that we've cleared all that up, we know the 2 ways that we can add styling to a component. This shouldn't be too surprising as it just mimics that of HTML. Now let's dig into the different ways that we can approach the defining of our styles.
 
 ---
 
 ## Writing CSS for React Components
 
-I have always found styling elements for the web very easy to get messy. Whilst CSS is great and has come a long way over the years, especially with more consistent browser support, there will always be confusing quirks that make us frustrated and confused as to why things aren't working how we would like. I think some of that is to do with a lot less certainty over our styling. Of course we can always break open Chrome Dev Tools and see what styles are being applied/overriden, but there is far less certainty of what styles are being used and which ones aren't compared to all other parts of our code base. I am always much more nervous about deleting a CSS ruleset than a function, because if we delete a function and it's used, our code will either crash or not compile and we'll know pretty quickly. In comparison our deleted CSS ruleset problem can be much more subtle.
+I have always found styling elements for the web very easy to get messy. Whilst CSS is great and has come a long way over the years, especially with more consistent browser support, there will always be confusing quirks that make us frustrated and confused as to why things aren't working how we would like. I think some of that is to do with a lot less certainty over our styling. Of course we can always break open Chrome Dev Tools and see what styles are being applied/overriden, but there is still far less certainty of what styles are being used and which ones aren't compared to all other parts of our code base. I am always much more nervous about deleting a CSS ruleset than a function, because if we delete a function and it's used, our code will either crash or not compile and we'll know pretty quickly. In comparison our deleted CSS ruleset problem can be much more subtle.
 
 Does this mean that we should write styles in a statically typed languange? I don't think so. Does this mean that we should write extensive style testing for all of our elements? I also don't think so, the tests would be quite brittle and it would make removing (in reality) unused rulesets no easier, as it would cause some tests to fail and we're still stuck trying to figure out if our styles are needed.
 
@@ -111,6 +111,8 @@ import 'Card.css';
 ```
 
 Now as CSS is global, any styles defined like this will be global. So once the stylesheet is loaded, the rulesets will be applied to the entire site. This is an important consideration. This approach can be very nice for defining the your very general purpose styles, and I would recommend keeping it that way. The less your component specific styles leak into the global styles, the better.
+
+Having said that, I also strongly recommend against writing style rulesets for HTML tags. Whilst they can be handy, once they've been added, they are very hard to get rid of. I wouldn't even put high-level theming in them, just very basic default styling that if you're writing a class to a apply to an element, you would already know what defaults you need to override without checking. For example, attributes like `box-sizing` or `margin`.
 
 ### CSS Modules
 
