@@ -9,7 +9,7 @@ import React from 'react';
 import Theme from './Theme';
 import MainContent from './MainContent';
 import Navbar from './Navbar';
-import { Sidebar, MobileSidebar } from './Sidebar';
+import { MobileSidebar } from './Sidebar';
 import Footer from './Footer';
 import MobileContext from './MobileContext';
 
@@ -49,29 +49,16 @@ const Layout = (props: { children: React.ReactNode }) => {
         <Theme color="green">
             <WindowWidth>
                 {(width) => {
-                    if (width && width >= 800) {
-                        return (
-                            <MobileContext.Provider value={false}>
-                                <Navbar />
-                                <MainContent>
-                                    <Sidebar />
-                                    {props.children}
-                                </MainContent>
-                                <Footer />
-                            </MobileContext.Provider>
-                        );
-                    } else if (width) {
-                        return (
-                            <MobileContext.Provider value={true}>
-                                <Navbar />
+                    return (
+                        <MobileContext.Provider value={width ? width >= 800 : false}>
+                            <Navbar />
+                            <MainContent>
                                 <MobileSidebar />
-                                <MainContent>{props.children}</MainContent>
-                                <Footer />
-                            </MobileContext.Provider>
-                        );
-                    } else {
-                        return null;
-                    }
+                                {props.children}
+                            </MainContent>
+                            <Footer />
+                        </MobileContext.Provider>
+                    );
                 }}
             </WindowWidth>
         </Theme>

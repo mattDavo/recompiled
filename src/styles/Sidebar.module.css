@@ -62,3 +62,21 @@
 .isSelected {
     color: var(--primary-color);
 }
+
+.isMobile {
+    display: none;
+}
+
+.isDesktop {
+    display: unset;
+}
+
+@media only screen and (max-width: 799px) {
+    .isMobile {
+        display: unset;
+    }
+
+    .isDesktop {
+        display: none;
+    }
+}

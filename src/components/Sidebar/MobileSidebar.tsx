@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import styled from 'styled-components';
 import { motion, useCycle, SVGMotionProps } from 'framer-motion';
 
@@ -93,21 +93,26 @@ function MobileSidebar() {
     const navStyle = styles.mobileSidebarContainer + (isOpen ? '' : ` ${styles.hidden}`);
 
     return (
-        <motion.nav initial={false} animate={isOpen ? 'open' : 'closed'}>
-            <div className={navStyle}>
-                <SidebarContent
-                    onItemClick={() => {
+        <Fragment>
+            <motion.nav initial={false} animate={isOpen ? 'open' : 'closed'} className={styles.isMobile}>
+                <div className={navStyle}>
+                    <SidebarContent
+                        onItemClick={() => {
+                            toggleOpen();
+                        }}
+                    />
+                </div>
+                <MenuToggle
+                    toggle={() => {
                         toggleOpen();
                     }}
                 />
-            </div>
-            <MenuToggle
-                toggle={() => {
-                    toggleOpen();
-                }}
-            />
-            <MobileSidebarBackground variants={sidebarVariants} />
-        </motion.nav>
+                <MobileSidebarBackground variants={sidebarVariants} />
+            </motion.nav>
+            <nav className={`${styles.sidebarContainer} ${styles.isDesktop}`}>
+                <SidebarContent />
+            </nav>
+        </Fragment>
     );
 }
 
