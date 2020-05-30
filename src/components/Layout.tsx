@@ -50,7 +50,7 @@ const Layout = (props: { children: React.ReactNode }) => {
             <WindowWidth>
                 {(width) => {
                     return (
-                        <MobileContext.Provider value={width ? width >= 800 : false}>
+                        <MobileContext.Provider value={width ? width < 800 : false}>
                             <Navbar />
                             <MainContent>
                                 <MobileSidebar />

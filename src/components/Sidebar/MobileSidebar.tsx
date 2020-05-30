@@ -94,7 +94,7 @@ function MobileSidebar() {
 
     return (
         <Fragment>
-            <motion.nav initial={false} animate={isOpen ? 'open' : 'closed'} className={styles.isMobile}>
+            <motion.nav initial={false} animate={isOpen ? 'open' : 'closed'} className={styles.isMobileOnly}>
                 <div className={navStyle}>
                     <SidebarContent
                         onItemClick={() => {
@@ -109,7 +109,7 @@ function MobileSidebar() {
                 />
                 <MobileSidebarBackground variants={sidebarVariants} />
             </motion.nav>
-            <nav className={`${styles.sidebarContainer} ${styles.isDesktop}`}>
+            <nav className={`${styles.sidebarContainer} ${styles.isDesktopOnly}`}>
                 <SidebarContent />
             </nav>
         </Fragment>
