@@ -9,7 +9,7 @@ import React from 'react';
 import Theme from './Theme';
 import MainContent from './MainContent';
 import Navbar from './Navbar';
-import { MobileSidebar } from './Sidebar';
+import { Sidebar } from './Sidebar';
 import Footer from './Footer';
 import MobileContext from './MobileContext';
 
@@ -50,10 +50,10 @@ const Layout = (props: { children: React.ReactNode }) => {
             <WindowWidth>
                 {(width) => {
                     return (
-                        <MobileContext.Provider value={width ? width < 800 : false}>
+                        <MobileContext.Provider value={width ? width < 800 : null}>
                             <Navbar />
                             <MainContent>
-                                <MobileSidebar />
+                                <Sidebar />
                                 {props.children}
                             </MainContent>
                             <Footer />

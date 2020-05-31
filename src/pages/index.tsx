@@ -9,7 +9,6 @@ import styles from '../styles/Home.module.css';
 import commonStyles from '../styles/Common.module.css';
 import { formatPost } from '../helpers';
 import { HashHeading1 } from '../components/Common';
-import { useMediaPredicate } from '../helpers/useMedia';
 
 const Posts = ({ posts }: { posts: Post[] }) => {
     return <div>{posts.map(formatPost)}</div>;
@@ -37,10 +36,8 @@ const Welcome = () => {
 };
 
 export function WelcomeMessage() {
-    const mobile = useMediaPredicate('(max-width: 799px)');
     return (
         <Fragment>
-            {mobile ? 'Mobile' : 'Desktop'}
             Welcome to <span className={commonStyles.keyword}>Recompiled!</span>
             {" Here you'll find articles written by "}
             <a href="https://mattdavo.com">Matt Davidson</a>

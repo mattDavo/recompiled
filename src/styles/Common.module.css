@@ -45,3 +45,21 @@
     padding: 10px 0px 10px 20px;
     font-size: 18px;
 }
+
+.isMobileOnly {
+    display: none !important;
+}
+
+.isDesktopOnly {
+    display: unset !important;
+}
+
+@media only screen and (max-width: 799px) {
+    .isMobileOnly {
+        display: unset !important;
+    }
+
+    .isDesktopOnly {
+        display: none !important;
+    }
+}

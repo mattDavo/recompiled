@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import Seo from './Seo';
 import MobileContext from './MobileContext';
-import { Keyword } from './Common';
+import { Keyword, DesktopOnly } from './Common';
 import { formatDate, sanitizeTags } from '../helpers';
 
 const maxWidth = '1140px';
@@ -180,22 +180,8 @@ export default function DefaultMDX(props: {
             <Seo title={title} description={description} />
             <MobileContext.Consumer>
                 {(isMobile) => {
-                    if (isMobile) {
-                        return (
-                            <ContentCol>
-                                <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
-                                <EditThisPage
-                                    href={`https://www.github.com/mattdavo/recompiled/tree/master/${props.data.mdx.fields.rootPath}`}
-                                >
-                                    Edit this page.
-                                </EditThisPage>
-                            </ContentCol>
-                        );
-                    }
                     return (
-                        <Row
-                            style={{ flexDirection: isMobile ? 'column' : 'row', display: isMobile ? 'block' : 'flex' }}
-                        >
+                        <Row>
                             <ContentCol>
                                 <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
                                 <EditThisPage
@@ -204,7 +190,7 @@ export default function DefaultMDX(props: {
                                     Edit this page.
                                 </EditThisPage>
                             </ContentCol>
-                            {!isMobile && (
+                            <DesktopOnly isDesktop={isMobile == null ? null : !isMobile}>
                                 <MetaCol>
                                     <MetaContent>
                                         <MetaList>
@@ -237,7 +223,7 @@ export default function DefaultMDX(props: {
                                         </MetaList>
                                     </MetaContent>
                                 </MetaCol>
-                            )}
+                            </DesktopOnly>
                         </Row>
                     );
                 }}

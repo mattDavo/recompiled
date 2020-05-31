@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, cloneElement, Children, isValidElement, Fragment } from 'react';
 import styled from 'styled-components';
 
 import styles from '../styles/Common.module.css';
@@ -39,3 +39,53 @@ const ContentContainer = styled.main`
 `;
 
 export { ContentContainer };
+
+export function ApplyStyle({
+    className,
+    isActive,
+    children,
+}: {
+    className: string;
+    isActive?: boolean;
+    children: React.ReactNode;
+}) {
+    return (
+        <Fragment>
+            {Children.map(children, (child) => {
+                // Checking isValidElement is the safe way and avoids a TS error too.
+                if (isValidElement(child) && (typeof isActive == 'undefined' || isActive === true)) {
+                    const mergedClassName = (child.props.className || '') + ' ' + className;
+                    return cloneElement(child, { className: mergedClassName });
+                }
+
+                return child;
+            })}
+        </Fragment>
+    );
+}
+
+export function createStyle(className: string) {
+    return function ({ children, isActive }: { children: React.ReactNode; isActive?: boolean }) {
+        return ApplyStyle({ className, isActive, children });
+    };
+}
+
+export function MobileOnly({ isMobile, children }: { isMobile: boolean | null; children: React.ReactNode }) {
+    if (isMobile == null) {
+        return ApplyStyle({ className: styles.isMobileOnly, children, isActive: true });
+    } else if (isMobile) {
+        return <Fragment>{children}</Fragment>;
+    } else {
+        return null;
+    }
+}
+
+export function DesktopOnly({ isDesktop, children }: { isDesktop: boolean | null; children: React.ReactNode }) {
+    if (isDesktop == null) {
+        return ApplyStyle({ className: styles.isDesktopOnly, children, isActive: true });
+    } else if (isDesktop) {
+        return <Fragment>{children}</Fragment>;
+    } else {
+        return null;
+    }
+}
