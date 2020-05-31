@@ -39,6 +39,7 @@ export const query = graphql`
         allMdx(
             filter: { fileAbsolutePath: { regex: "//content/articles/" } }
             sort: { fields: frontmatter___published, order: DESC }
+            filter: { frontmatter: { wip: { ne: true } } }
         ) {
             edges {
                 node {
