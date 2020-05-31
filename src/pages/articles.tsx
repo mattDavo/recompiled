@@ -37,9 +37,8 @@ export default function ArticlesPage(props: PodacastReviewPageProps) {
 export const query = graphql`
     query ArticlesIndex {
         allMdx(
-            filter: { fileAbsolutePath: { regex: "//content/articles/" } }
+            filter: { fileAbsolutePath: { regex: "//content/articles/" }, frontmatter: { wip: { ne: true } } }
             sort: { fields: frontmatter___published, order: DESC }
-            filter: { frontmatter: { wip: { ne: true } } }
         ) {
             edges {
                 node {
