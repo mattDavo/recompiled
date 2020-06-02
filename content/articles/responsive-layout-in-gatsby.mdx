@@ -1,0 +1,225 @@
+---
+slug: /articles/responsive-layout-in-gatsby
+title: 'Responsive Layout in Gatsby'
+description: 'Learn how to build a responsive layout in Gatsby that looks great on the static render.'
+published: 1591104536
+updated: 1591104539
+authors:
+  - mattdavo
+tags:
+  - react
+  - static render
+  - fcp
+  - gatsby
+links:
+  - title: Static Rendering
+    to: 'https://developers.google.com/web/updates/2019/02/rendering-on-the-web#static-rendering'
+  - title: Gatsby
+    to: 'https://www.gatsbyjs.org/'
+  - title: App Shell Model
+    to: 'https://developers.google.com/web/fundamentals/architecture/app-shell'
+---
+
+# Responsive Layout in Gatsby
+
+When building a web application we almost always want it to be responsive to different devices, but there are different cases and many ways to implement them. To ensure the best experience for our users we must understand the implementation tradeoffs, which we will explore here.
+
+## Structural or Styling Differences
+
+You may notice that **Recompiled** looks quite different on mobile, for example the header is turned vertically and no longer floating, and the sidebar becomes a toggle. But these are not equal differences. The header requires no structural change when the window transitions from desktop to mobile sizing (or vice versa). I define **structural change** as change to the structure of the elements in the DOM. This is because I only need to adjust the CSS attributes of elements in the header so that the flexbox displays correctly.
+
+Where as the Sidebar (i.e. Home, Articles, Tags, etc.) has a different structure in the DOM on mobile and desktop. This can complicate matters when trying to create the best user experience. On my early releases of this site, I had quite a poor user experience. Let's take a look why as we explore the ways to implement responsive structural differences in React.
+
+---
+
+## The Easy Way
+
+I like to use the [React Context API](https://reactjs.org/docs/context.html) for providing information to my components on whether it is in Mobile or Desktop mode. There are a few ways to implement this, for example using `window.innerWidth` or the [`window.matchMedia()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia). I originally implemented it a little bit like this. Create a WindowWidth wrapper component and use that to set the value of the `MobileContext.Provider`
+
+```jsx:title=WindowWidth.jsx
+class WindowWidth extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { width: null };
+  }
+
+  componentDidMount() {
+    this.setState({ width: window.innerWidth });
+    window.addEventListener('resize', ({ target }) => {
+      if (target) {
+        this.setState({ width: target.innerWidth });
+      }
+    });
+  }
+
+  render() {
+    return this.props.children(this.state.width);
+  }
+}
+```
+
+```jsx:title=AppWrapper.jsx
+function AppWrapper({ children }) {
+  return (
+    <WindowWidth>
+      {(width) => {
+        return (
+          <MobileContext.Provider value={width ? width < 800 : null}>
+            {children}
+          </>
+        );
+      }}
+    </WindowWidth>
+  );
+}
+```
+
+That's pretty neat right? Yeah it is, except we need to be careful how we use it. I'm using [Gatsby](https://www.gatsbyjs.org/) which is great because it is able to make your site feel very fast by generating static versions of all the pages at build time and serve them. Then once all of the JavaScript has been downloaded, React can attach itself and take over. This way we can benefit from a very fast [First Contentful Paint (FCP)](https://web.dev/fcp/).
+
+> First Contentful Paint: the metric which measures the time from when the page starts loading to when any part of the page's content is rendered on the screen. - [Philip Walton](https://web.dev/authors/philipwalton).
+
+What Gatsby does so well is that by parsing your app at build time it is able to generate very **contentful** pages to serve first. This is in comparison to something simple like [Create React App](https://create-react-app.dev/) which will just serve your basic `index.html` and then only once all of the JavaScript in your bundle has been downloaded, React can render your app for you. If you require a lot of JS to be downloaded and/or there is a slow internet connection this can create quite a poor user experience.
+
+However, Gatsby is not magic and you must use it wisely because you must write your React components keeping in mind what can be rendered without access to browser APIs like `window`. If you don't, you will not harness Gatsby's best feature and worsen your user experience. Instead of your FCP being also the first paint, it will be much later at the same time as when it first interactive with JS. [This post on static rendering](https://developers.google.com/web/updates/2019/02/rendering-on-the-web#static-rendering) outlines all of this perfectly.
+
+So, with that in mind, how can the above allow us to fall into the trap of a poor FCP. Well, if we use the `MobileContext` to define the structure of our components, the static render will not be as good as it could be. For example, we could implement it like the following:
+
+```jsx:title=Example1.jsx
+function Layout() {
+  return (
+    <MobileContext.Consumer>
+      {(isMobile) => {
+        if (isMobile) {
+          return <MobileLayout />;
+        } else {
+          return <DesktopLayout />;
+        }
+      }}
+    </MobileContext.Consumer>
+  );
+}
+```
+
+```jsx:title=Example2.jsx
+function Layout() {
+  return (
+    <MobileContext.Consumer>
+      {(isMobile) => {
+        if (isMobile) {
+          return <MobileLayout />;
+        } else if (isMobile === false) {
+          return <DesktopLayout />;
+        } else {
+          return null;
+        }
+      }}
+    </MobileContext.Consumer>
+  );
+}
+```
+
+Both of these are a compromise to us not having access to the browser APIs on the static render. In `Example1.jsx` we'll default to loading the desktop structure, which will look great on desktop on the initial render however, it will still initially load the desktop structure on mobile as well, until the entire bundle loads and React can instead render the mobile layout. This will often look quite janky and isn't a good user experience.
+
+Alternatively, in `Example2.jsx` we don't have any weird initial render then change once the JS is loaded, because instead just nothing is rendered. It won't look terrible but it could be a bit sluggish. However, that being said if this is for a relatively small component in the page, it's not a terrible option. However I think we can do better.
+
+## Better with Media Queries
+
+Ok, we can do better than this. But how? Well, our goal is to render the correct DOM structure for any size on the initial render (without rendering nothing). We can apply this conditional logic by using media queries to apply different styles depending on screen `max-width` for example. It is obvious how this works for a responsive design where the structure does not change. But for a design where the structure does change, we must render **BOTH** structures in the DOM and we will use media queries to only display one of them. Then the static render will be beautiful!
+
+Here is an example of two CSS classes we can use to do this, where the mobile display is shown on devices under 800px wide.
+
+```css
+.isMobileOnly {
+  display: none !important;
+}
+
+.isDesktopOnly {
+  display: unset !important;
+}
+
+@media only screen and (max-width: 799px) {
+  .isMobileOnly {
+    display: unset !important;
+  }
+
+  .isDesktopOnly {
+    display: none !important;
+  }
+}
+```
+
+> Note the use of `!important` here. It should rarely be used as it can make your CSS hard to understand, but it makes sense here as the the classes must be followed, otherwise they are useless.
+
+We can then use these classes to only show certain structures when we want, with something like this.
+
+```jsx
+function Layout({ children }) {
+  return (
+    <div>
+      <Header />
+      <DesktopSidebar className="isDesktopOnly" />
+      <MobileSidebar className="isMobileOnly" />
+      {children}
+    </div>
+  );
+}
+```
+
+You may choose to apply the CSS classes directly to your components like this or you could wrap them in a `div` and you can then remove the `!important` classifier. Let's use the `div` method and clean this up into a reusable component, ready for the next section.
+
+```jsx:title=Responsive.jsx
+function MobileOnly({ children }) {
+  return <div className="isMobileOnly">{children}</div>;
+}
+
+function DesktopOnly({ children }) {
+  return <div className="isDesktopOnly">{children}</div>;
+}
+```
+
+Sweet!
+
+## Pruning with React
+
+Ok, we've now massively improved our static render, but we can do better. We can add in some pruning, so that once the JS bundle loads, the unused components are removed from the DOM completely, instead of just with the style `display: none`. This is not too difficult since our `MobileContext` will return `null` when there is no JS, which will be the case for the static render.
+
+So let's add another prop to our components, for brevity I'll only focus on `MobileOnly` for now. This prop will allow us to decide which of the three cases we need to render:
+
+1. null, apply the style
+2. true, don't apply the style, but render
+3. false, don't render
+
+So the inital load will be all Mobile/Desktop elements with their classes. Then once the JS takes over, we'll prune off unneeded nodes. Cool! It should like a little like this:
+
+```jsx:title=MobileOnly.jsx
+function MobileOnly({ isMobile, children }) {
+  if (isMobile == null) {
+    return <div className="isMobileOnly">{children}</div>;
+  } else if (isMobile) {
+    return <Fragment>{children}</Fragment>;
+  } else {
+    return null;
+  }
+}
+```
+
+Then we can use our `MobileOnly` component all over the place like so:
+
+```jsx:title=Sidebar.jsx
+function Sidebar() {
+  return (
+    <MobileContext.Provider>
+      {(isMobile) => {
+        {
+          /* Some sidebar stuff */
+        }
+        <MobileOnly isMobile={isMobile}>
+          <SidebarToggle />
+        </MobileOnly>;
+      }}
+    </MobileContext.Provider>
+  );
+}
+```
+
+Awesome! Well, there we have it. We've learnt both about how to leverage the static rendering of Gatsby whilst also a gotten a wider appreciation of what goes into providing a great user experience, especially in the context of React. Because if we're not careful about our design we may be missing out on providing our users a much better experience. Don't forget that considering the initial static render is not only useful when using a static site generator like Gatsby, as similar principles can be applied when using a server rendering approach.
