@@ -42,9 +42,9 @@ export default function TagsPage(props: TagsPageProps) {
         },
     } = props;
 
-    const tags = sanitizeTags(
-        Array.from(
-            new Set(
+    const tags = Array.from(
+        new Set(
+            sanitizeTags(
                 edges
                     .map((edge) => edge.node.frontmatter.tags)
                     .reduce((p, c) => {
