@@ -4,7 +4,7 @@ import { Link, graphql } from 'gatsby';
 
 import Tag from '../components/Tag';
 import Seo from '../components/Seo';
-import { sanitizeTags } from '../helpers';
+import { sanitizeTag } from '../helpers';
 import { ContentContainer, HashHeading1 } from '../components/Common';
 
 interface TagsPageProps {
@@ -44,13 +44,12 @@ export default function TagsPage(props: TagsPageProps) {
 
     const tags = Array.from(
         new Set(
-            sanitizeTags(
-                edges
-                    .map((edge) => edge.node.frontmatter.tags)
-                    .reduce((p, c) => {
-                        return [...p, ...(c ? c : [])];
-                    }, []),
-            ),
+            edges
+                .map((edge) => edge.node.frontmatter.tags)
+                .reduce((p, c) => {
+                    return [...p, ...(c ? c : [])];
+                }, [])
+                .map(sanitizeTag),
         ),
     ).sort();
     return (
