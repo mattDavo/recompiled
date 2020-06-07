@@ -3,7 +3,7 @@ slug: /podcasts/review/polymorphic-interfaces
 title: 'Pod Review: Polymorphic Interfaces with Dave Abrahams'
 description: Learn about how use protocol-oriented programming and the benefits and implementation considerations of value types.
 published: 1591492631
-updated: 1591492631
+updated: 1591503124
 tags:
     - resources
     - podcasts
@@ -30,7 +30,7 @@ In this fantastic episode John goes into depth with [Dave Abrahams](https://twit
 
 Dave and John discuss the benefits protocol-oriented programming can have over object-oriented in terms of code reuse and extensibility, but Dave offers a warning that protocols should not be the default design choice and instead emerge as a natural way to reuse code. Furthermore, they discuss how Swift is the first language to implement the concept of `associated type`s as a first class language feature; it's usefulness but also the confusing issue of [type erasure](https://www.swiftbysundell.com/articles/different-flavors-of-type-erasure-in-swift/). Dave suggests that Swift programmers should always avoid using erasure where possible because whilst it is unsafe it will be much less performant code. The only time type erasure should be used is when the types cannot be known at compile time, but even still type erasure can sometimes be avoided in this scenario.
 
-With his C++ background, Dave talks about C++'s influence on the design of Swift. Swift and C++ are the only two widely used languages that use value types beyond basic literals for example with arrays in Swift and vectors in C++. However, the drawback of this in C++ is seen when passing large value types into functions, as it will directly worsen the performance as the size of the function parameters increases. This is typically combatted by passing the variable as a constant reference. For example:
+With his C++ background, Dave talks about C++'s influence on the design of Swift. Swift and C++ are the only two widely used languages that use value types beyond basic literals for example with arrays in Swift and vectors in C++. However, the drawback of this in C++ is seen when passing large value types into functions, as it will directly worsen the performance as the size of the function parameters increases. This is typically combated by passing the variable as a constant reference. For example:
 
 ```cpp
 // Very slow as sentences increases in size
