@@ -1,0 +1,46 @@
+---
+slug: /podcasts/review/polymorphic-interfaces
+title: 'Pod Review: Polymorphic Interfaces with Dave Abrahams'
+description: Blah lah
+published: 1591492631
+updated: 1591492631
+tags:
+    - resources
+    - podcasts
+    - podcast review
+    - swift
+    - swift by sundell
+    - generics
+authors:
+    - mattdavo
+links:
+    - title: Episode
+      to: https://www.swiftbysundell.com/podcast/71/
+    - title: 'Protocol-Oriented Programming in Swift'
+      to: 'https://developer.apple.com/videos/play/wwdc2015/408'
+---
+
+# Pod Review: Polymorphic Interfaces with Dave Abrahams
+
+## Podcast: [Swift By Sundell](https://www.swiftbysundell.com/podcast/71/)
+
+In this fantastic episode John goes into depth with [Dave Abrahams](https://twitter.com/DaveAbrahams) about the design of Swift overall, the Swift Standard library and protocols in Swift. Dave has an impressive background that includes working in C++, the Swift standard library, and recently Swift for Tensorflow.
+
+Dave and John discuss the benefits protocol-oriented programming can have over object-oriented in terms of code reuse and extensibility, but Dave offers a warning that protocols should not be the default design choice and instead emerge as a natural way to reuse code. Furthermore, they discuss how Swift is the first language to implement the concept of `associated type`s as a first class language feature; it's usefulness but also the confusing issue of [type erasure](https://www.swiftbysundell.com/articles/different-flavors-of-type-erasure-in-swift/). Dave suggests that Swift programmers should always avoid using erasure where possible because whilst it is unsafe it will be much less performant code. The only time type erasure should be used is when the types cannot be known at compile time, but even still type erasure can sometimes be avoided in this scenario.
+
+With his C++ background, Dave talks about C++'s influence on the design of Swift. Swift and C++ are the only two widely used languages that use value types beyond basic literals for example with arrays in Swift and vectors in C++. However, the drawback of this in C++ is seen when passing large value types into functions, as it will directly worsen the performance as the size of the function parameters increases. This is typically combatted by passing the variable as a constant reference. For example:
+
+```cpp
+// Very slow as sentences increases in size
+auto by_value(std::string const sentence) -> char;
+// Negligable performance impact as sentence increases in size.
+auto by_reference(std::string const& sentence) -> char;
+```
+
+However, thanks to learning from languages like C++, Swift was able to implement value types for arrays without suffering from a performance penalty.
+
+I highly recommend listening to this podcast, especially if you have an interest in programming languages and their design.
+
+### Related links:
+
+-   [Dave's 'Protocol-Oriented Programming in Swift' WWDC talk](https://developer.apple.com/videos/play/wwdc2015/408)
