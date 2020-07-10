@@ -25,7 +25,7 @@ function SidebarContent({ onItemClick }: SidebarContentProps) {
             </SidebarItem>*/}
             <SidebarItem title="📰 Articles" link="/articles" onClick={onItemClick} />
             <SidebarItem title="🏷 Tags" link="/tags" onClick={onItemClick} />
-            <SidebarItem title="👨‍👨‍👧‍👧 Open Source" link="/open-source" onClick={onItemClick} />
+            {/* <SidebarItem title="👨‍👨‍👧‍👧 Open Source" link="/open-source" onClick={onItemClick} /> */}
             <SidebarItem title="🎙 Podcasts" link="/podcasts" onClick={onItemClick}>
                 <SidebarItem title="Review" link="/podcasts/review" onClick={onItemClick} />
             </SidebarItem>
