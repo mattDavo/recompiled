@@ -17,7 +17,7 @@ const LineNo = styled.span`
 const FileName = styled.span`
     display: block;
     margin: 10px 20px;
-    color: var(--text-color);
+    color: white;
     opacity: 0.8;
 `;
 
